@@ -1,0 +1,95 @@
+@import "./element-ui.scss";
+@import "./sidebar.scss";
+@import "./transition.scss";
+@import "./variables.scss";
+@import "./main.scss";
+
+// global color and background color
+
+// global style
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  text-rendering: optimizeLegibility;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+#app {
+  height: 100%;
+}
+
+// 一级标题
+.main-title {
+  color: var(--main-title-default, #2c3e50);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.main-title:hover {
+  cursor: pointer;
+}
+// 二级标题
+.sub-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.sub-title:hover {
+  cursor: pointer;
+}
+
+// 禁用文字选择
+.disabled-copy {
+  -ms-user-select: none !important;
+  -khtml-user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  user-select: none !important;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: #f5f5f5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #c8c8c8;
+}
+
+ol,
+p,
+ul {
+  line-height: 1.7;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.default-textc {
+  color: var(--color-success) !important;
+}

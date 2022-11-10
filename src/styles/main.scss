@@ -1,0 +1,70 @@
+// 20: sidebar 18 + padding 2
+$border-color: var(--color-success);
+.main {
+  max-width: 100%;
+  width: calc(100% - 5rem);
+  min-width: calc(100% - 20rem);
+  padding: 0 1.7rem;
+  padding-bottom: 2rem;
+  .prism-editor {
+    width: calc(100% - 10rem);
+  }
+  h3:not(.custom) {
+    position: relative;
+    padding-top: 1rem;
+    margin-left: 1rem;
+    border-bottom: 1px solid #eaecef;
+  }
+  h4:not(.custom) {
+    position: relative;
+    padding-top: 1rem;
+    padding-left: 2rem;
+  }
+  section:not(.custom) {
+    font-size: 0.8em;
+    padding-left: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    p:not(.custom) {
+      padding-bottom: 0.5rem;
+    }
+    section:not(.custom) {
+      font-size: 0.8rem;
+      padding-top: 0rem;
+      padding-bottom: 0.5rem;
+    }
+    ul:not(.custom) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    .a-link {
+      opacity: 0;
+      float: left;
+      font-size: 0.85em;
+      text-align: center;
+      color: var(--color-success);
+      margin-left: -0.87em;
+      padding-right: 0.23em;
+      margin-top: 0.125em;
+      transition: opacity 0.5s linear;
+      &:hover {
+        cursor: pointer;
+        border-bottom: 2px solid $border-color;
+      }
+    }
+    &:hover {
+      .a-link {
+        opacity: 1;
+      }
+    }
+  }
+
+  .red {
+    color: red;
+    font-weight: 600;
+  }
+}
