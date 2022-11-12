@@ -6,12 +6,14 @@ $border-color: var(--color-success);
   min-width: calc(100% - 20rem);
   padding: 0 1.7rem;
   padding-bottom: 2rem;
+  font-size: 0.9em;
   // 代码块
   .prism-editor {
     width: calc(100% - 10rem);
   }
   // 一级标题
   h3:not(.custom) {
+    font-size: 1.5em !important;
     position: relative;
     padding-top: 1rem;
     margin-left: 1rem;
@@ -19,13 +21,26 @@ $border-color: var(--color-success);
   }
   // 二级标题
   h4:not(.custom) {
+    font-size: 1.3em;
     position: relative;
     padding-top: 1rem;
     padding-left: 2rem;
   }
+  // 三级标题
+  .c-h5 {
+    font-size: 1.1em !important;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  // 四级标题
+  .c-h6 {
+    font-size: 0.95em !important;
+    font-weight: 600;
+    margin: 10px 0;
+  }
   // 二级内容
   section:not(.custom) {
-    font-size: 1em;
+    font-size: 0.9em;
     padding-left: 3rem;
     padding-top: 1rem;
     // padding-bottom: 0.5rem;
@@ -34,24 +49,17 @@ $border-color: var(--color-success);
     }
     // 三级内容
     section:not(.custom) {
-      font-size: 1em;
+      font-size: 0.9em;
       padding-top: 0rem;
       padding-bottom: 0.5rem;
     }
     ul:not(.custom) {
-      font-size: 1em;
+      font-size: 1.05em;
       margin-bottom: 1rem;
-    }
-    div:not(.custom) {
-      font-size: 0.9em;
-      .h4 {
-        font-size: 1.1em;
-        font-weight: 600;
-        margin-bottom: 10px;
-      }
     }
   }
 
+  // 一级、二级、三级 title style
   h2,
   h3,
   h4 {
@@ -77,16 +85,24 @@ $border-color: var(--color-success);
     }
   }
 
+  // 重点标红加粗
   .red {
+    font-size: 0.9em;
     color: red;
-    font-weight: 600;
+    font-weight: 500;
   }
 
+  // 外链
   .a-navigation {
     font-size: 0.9em;
     display: inline-block;
     color: $border-color;
     margin-left: 10px;
     padding-bottom: 8px;
+  }
+
+  // 首字符缩进
+  .indent {
+    text-indent: 32px;
   }
 }

@@ -24,7 +24,7 @@ app.config.globalProperties.$builtIn = auth.builtIn;
 app.use(store);
 app.use(router);
 app.use(ElementPlus);
-app.component("PrismEditor", PrismEditor)
+app.component("WebPrismEditor", PrismEditor)
 app.mount('#app');
 
 
