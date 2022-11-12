@@ -117,7 +117,7 @@ const handleRun = () => {
 <style lang='scss'>
 .prism-editor {
     width: 100%;
-
+    margin-top: 10px;
     .bottom-toolbar {
         width: 100%;
         display: flex;
