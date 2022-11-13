@@ -38,31 +38,16 @@ $border-color: var(--color-success);
     font-weight: 600;
     margin: 10px 0;
   }
-  // 二级内容
-  section:not(.custom) {
-    font-size: 0.9em;
-    padding-left: 3rem;
-    padding-top: 1rem;
-    // padding-bottom: 0.5rem;
-    p:not(.custom) {
-      // padding-bottom: 0.5rem;
-    }
-    // 三级内容
-    section:not(.custom) {
-      font-size: 0.9em;
-      padding-top: 0rem;
-      padding-bottom: 0.5rem;
-    }
-    ul:not(.custom) {
-      font-size: 1.05em;
-      margin-bottom: 1rem;
-    }
+  // 一级内容下的直接子元素
+  div > ul {
+    padding-left: 1.5rem;
   }
 
-  // 一级、二级、三级 title style
+  // 一级、二级、三级、四级 title style
   h2,
   h3,
-  h4 {
+  h4,
+  .c-h5 {
     .a-link {
       opacity: 0;
       float: left;
@@ -104,5 +89,30 @@ $border-color: var(--color-success);
   // 首字符缩进
   .indent {
     text-indent: 32px;
+  }
+
+  // 二级内容
+  section:not(.custom) {
+    font-size: 0.9em;
+    padding-left: 3rem;
+    padding-top: 1rem;
+    // padding-bottom: 0.5rem;
+    p:not(.custom) {
+      // padding-bottom: 0.5rem;
+    }
+    // 二级内容下的ul
+    ul:not(.custom) {
+      font-size: 1em;
+      margin-bottom: 1rem;
+      li {
+        margin: 5px 0;
+      }
+    }
+    // 三级内容
+    section:not(.custom) {
+      font-size: 0.9em;
+      padding-top: 0rem;
+      padding-bottom: 0.5rem;
+    }
   }
 }

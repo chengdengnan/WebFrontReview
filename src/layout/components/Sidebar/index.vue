@@ -46,9 +46,10 @@ let subHashId = ref<string>("");
 
 const treeNode = async (): Promise<void> => {
     const res = await infoTreeNode({ path: curentPath.value, routeName: route.hash.replace("#", "") });
-    if (!res) return;
-    parentHashId.value = res.data.parentHashId;
-    subHashId.value = res.data.hashId;
+    if (res.data) {
+        parentHashId.value = res.data.parentHashId;
+        subHashId.value = res.data.hashId;
+    }
 }
 
 const _fetch = async (path: string): Promise<void> => {
@@ -66,9 +67,9 @@ const _fetch = async (path: string): Promise<void> => {
 }
 
 
-watch(() => route.hash, (newVal, oldVal) => {
+watch(() => route.hash, async (newVal, oldVal) => {
     if (newVal && newVal !== oldVal) {
-        treeNode()
+        await treeNode()
         nextTick(() => {
             const Elment = document.querySelector(newVal) as HTMLElement;
             if (!Elment) return

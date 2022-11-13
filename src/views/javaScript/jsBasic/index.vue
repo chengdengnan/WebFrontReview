@@ -209,7 +209,8 @@
                     <RouterLink to="#EightMethods" class="a-link">#</RouterLink>3、八大方法
                 </h4>
                 <section>
-                    <div class="c-h5">1. Promise.resolve</div>
+                    <div class="c-h5">
+                        1. Promise.resolve</div>
                     <p class="indent">静态方法<code>Promise.resolve(value)</code>可以认为是<code>new
                             Promise</code>方法的语法糖,比如<code>Promise.resolve(42)</code>
                         可以认为是以下代码的语法糖
@@ -281,12 +282,105 @@
                 </section>
                 <section>
                     <div class="c-h5">4. Promise.catch</div>
+                    <div>
+                        <div class="c-h6">① 语法糖的本质</div>
+                        <p class="indent">
+                            这里我们再说一遍，实际上<code>Promise.catch</code>只是<code>promise.then(undefined, onRejected)</code>
+                            方法的一个别名而已。也就是说，这个方法用来注册当<code>Promise</code>对象状态变为 <code>Rejected</code>时
+                            的回调函数。可以看下面代码，两者写法是等价的，但是很明显
+                            <code>Promise.catch</code>会让人第一眼看上去不会眼花缭乱:
+                        </p>
+                        <WebPrismEditor v-model="PromiseCatch"></WebPrismEditor>
+                        <p>那么我们现在来说说为什么推荐使用第二种方法，而不是第一种:</p>
+                        <div>
+                            <ul>
+                                <li>使用<code>promise.then(onFulfilled, onRejected)</code>
+                                    的话，在<code>onFulfilled</code>中发生异常的话，<code>onRejected</code>
+                                    中是捕获不到这个异常的。而且如果链式很长，每一条链上都要这么写。
+                                </li>
+                                <li>
+                                    在<code>promise.then(onFulfilled).catch(onRejected)</code>
+                                    的情况下<code>.then</code>中产生异常能在<code>.catch</code>
+                                    中捕获。<code>.then</code>和<code>.catch</code>本质上是没有区别的，
+                                    需要分场合使用
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="c-h6">② 只有一个主人</div>
+                        <p class="indent">我们上面已经说过了，在书写很长的<code>Promise</code>链式，从代码清晰度和简易程度来讲，在最后添加
+                            <code>catch</code>是远远在每一层链上写<code>onRejected</code>回调函数是要好的，因为<code>catch</code>可以捕获
+                            <code>Promise</code>链中每一层节点的错误，这句话本身没有错，但从这句话延伸出一种错误的理解：<code>catch</code>
+                            同时监控着所有节点。实际上<code>catch</code>函数在同一个时间点只属于某一个<code>Promise</code>，因为它的主人是随着程序
+                            的执行而不断变化的，我们来举个例子：
+                        </p>
+                        <WebPrismEditor v-model="PromiseCatchTwo"></WebPrismEditor>
+                        <p>在上述例子中，如果整个程序每一步都正确执行，那么会顺序产生三个<code>Promise</code>对象，分别是
+                            <code>Promise(1)</code>,<code>Promise(2)</code>,<code>Promise(3)</code>:
+                        </p>
+                        <ul>
+                            <li>可是如果在第一层具体执行逻辑出错了后，那实际上后面的两个<code>then</code>
+                                中的回调函数压根不会被异步执行，所以会直接异步触发<code>catch</code>中的回调函数执行，
+                                所以这种情况下<code>catch</code>是<code>Promise(1)</code>对象的<code>catch</code>。
+                            </li>
+                            <li>
+                                如果第一层具体执行逻辑正确执行，就会异步触发第二个<code>then</code>中的回调函数执行，那么同理
+                                ，在第二次具体执行逻辑抛出错误，会导致<code>Promise(2)</code>的状态变化，所以这种情况下<code>catch</code>
+                                是<code>Promise(2)</code>对象的<code>catch</code>。
+                            </li>
+                            <li>同理<code>Promise(3)</code>也是如此</li>
+                        </ul>
+                        <p>总结下来就是：整个<code>Promise</code>链中，<code>catch</code>只属于异步触发它当中回调函数
+                            执行的那个<code>Promise</code>，并不属于所有 <code>Promise</code></p>
+                    </div>
                 </section>
                 <section>
                     <div class="c-h5">5. Promise.finally</div>
+                    <p class="indent"><code>promise.finally</code>方法的回调函数不接受任何参数，这意味着<code>finally</code>没有办法
+                        知道，前面的<code>Promise</code>状态到底是<code>fulfilled</code>还是<code>rejected</code>
+                        。这表明，<code>finally</code>方法里面的操作，应该是与<code>Promise</code>状态无关的，不依赖于
+                        <code>Promise</code>的执行结果。我们来看下面代码：
+                    </p>
+                    <WebPrismEditor v-model="PromiseFinally"></WebPrismEditor>
+                    <p><code>finally</code>本质上是<code>then</code>方法的特例。我们来看下面伪代码：</p>
+                    <WebPrismEditor v-model="PromiseFinallyTwo"></WebPrismEditor>
+                    <p>上面代码中，如果不使用<code>finally</code>方法，同样的语句需要为成功和失败的状态各写一次。
+                        有了<code>finally</code>方法，则只需要写一次。那么它是如何实现的呢？
+                    </p>
+                    <WebPrismEditor v-model="PromiseFinallyThree"></WebPrismEditor>
+                    <p>上述代码中，不管前面的<code>Promise</code>是<code>fulfilled</code>还是<code>rejected</code>
+                        ，都会执行回调函数<code>callback</code></p>
                 </section>
                 <section>
                     <div class="c-h5">6. Promise.all</div>
+                    <p class="indent">
+                        <code>Promise.all</code>接受一个<code>promise</code>对象的数组作为参数，当这个数组里的所有 <code>Promise</code> 对象
+                        全部变为<code>resolve</code>或者<code>reject</code>状态的时候，它才会去调用<code>.then</code>方法。
+                    </p>
+                    <p class="indent">
+                        传递给<code>Promise.all</code>的 <code>promise</code>并不是一个个的顺序执行的，而是同时开始、并行执行的，我们可以看下面例子
+                    </p>
+                    <WebPrismEditor v-model="PromiseAll"></WebPrismEditor>
+                    <p>为什么这个例子可以看出来<code>Promise.all()</code>是并行的呢？因为所有<code>Promise</code>执行完只用了5秒，如果3个
+                        <code>Promise</code>是按照顺序执行的，那么应该是9秒或者，在5-9之间，因为4个<code>Promise</code>并不是同时执行的，同时执行的
+                        话总时间就是那个花费时间最长的<code>Promise</code>
+                    </p>
+                    <p><code>Promise.all()</code>重要细节点 <span class="red">（面试常考）</span>：</p>
+                    <div>
+                        <ul>
+                            <li>
+                                如果所有的<code>Promise</code>中只有一个执行错误，那么整个<code>Promise.all</code>不会走<code>Promise.all().then()</code>
+                                而是走<code>Promise.all().catch()</code>这个流程了。但是要注意的是虽然走到了<code>Promise.all().catch()</code>这个流程
+                                ，<span class="red">但是其他<code>Promise</code>还是会正常执行，但不会返回结果</span>
+                            </li>
+                            <li>
+                                要注意<code>Promise.all()</code>的返回值顺序，<code>Promise.all().then()</code>的返回值顺序和传入的顺序是一致的，笔试时
+                                遇到手写<code>Promise.all()</code>时要注意
+                            </li>
+                            
+                        </ul>
+                    </div>
                 </section>
                 <section>
                     <div class="c-h5">7. Promise.allSettled</div>
@@ -610,6 +704,113 @@ Promise.resolve("Barry")
 .then((result) => {
   console.log("result", result); // "Barry"
 });
+`)
+
+const PromiseCatch = $builtIn(`
+// 第一种写法
+Promise.resolve()
+  .then((data) => console.log(data))
+  .then(undefined, (err) => console.log(err));
+
+// 第二种写法
+Promise.resolve()
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err));
+`)
+
+const PromiseCatchTwo = $builtIn(`
+let p1 = new Promise((resolve, reject) => {
+  // 第一层执行逻辑
+  resolve("first promise"); // Promise(1)
+})
+  .then((res) => {
+    // 第二层执行逻辑
+    return "second promise"; // Promise(2)
+  })
+  .then((res) => {
+    // 第三层执行逻辑
+    return "third promise"; // Promise(3)
+  })
+  .catch((err) => {
+    console.log("err", err);
+  });
+`)
+
+const PromiseFinally = $builtIn(`
+var p1 = new Promise((resolve, rejevt) => {
+  setTimeout(() => {
+    resolve;
+  }, 1000);
+});
+
+p1.then((res) => console.log(res))
+  .catch((err) => console.log(err))
+  .finally(() => console.log("finally"));
+`)
+
+const PromiseFinallyTwo = $builtIn(`
+promise.finally(() => {
+  // 执行逻辑
+});
+// 上面代码等同于下面
+promise.then(
+  (onFulilled) => {
+    // 语句
+    return onFulilled;
+  },
+  (onRejected) => {
+    // 语句
+    throw onRejected;
+  }
+);
+`)
+
+const PromiseFinallyThree = $builtIn(`
+Promise.prototype.finally = function (callback) {
+  let p = this.constructor;
+  return this.then(
+    (value) => p.resolve(callback()).then(() => value),
+    (reason) =>
+      p.reject(callback()).then(() => {
+        throw reason;
+      })
+  );
+};
+
+var p = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    reject("Promise err");
+  }, 1000);
+});
+p.catch((err) => console.log("err", err)).finally(() => {
+  console.log("finally");
+});`)
+
+const PromiseAll = $builtIn(`
+var promise1 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    resoleve("promise1--3000");
+  }, 3000);
+});
+var promise2 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    resoleve("promise1--1000");
+  }, 1000);
+});
+var promise3 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    resoleve("promise1--5000");
+  }, 5000);
+});
+
+var promiseArr = [promise1, promise2, promise3];
+console.time("promiseArr");
+Promise.all(promiseArr)
+  .then((res) => {
+    console.log("res", res); // ['promise1--3000', 'promise1--1000', 'promise1--5000']
+    console.timeEnd("promiseArr"); // 5523.29296875 ms
+  })
+  .catch((err) => console.log(err));
 `)
 </script>
 
