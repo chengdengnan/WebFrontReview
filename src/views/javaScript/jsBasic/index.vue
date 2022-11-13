@@ -205,8 +205,8 @@
             </div>
 
             <div>
-                <h4 id="EightMethods">
-                    <RouterLink to="#EightMethods" class="a-link">#</RouterLink>3、八大方法
+                <h4 id="NineMethods">
+                    <RouterLink to="#NineMethods" class="a-link">#</RouterLink>3、九大方法
                 </h4>
                 <section>
                     <div class="c-h5">
@@ -378,20 +378,150 @@
                                 要注意<code>Promise.all()</code>的返回值顺序，<code>Promise.all().then()</code>的返回值顺序和传入的顺序是一致的，笔试时
                                 遇到手写<code>Promise.all()</code>时要注意
                             </li>
-                            
+
                         </ul>
                     </div>
                 </section>
                 <section>
                     <div class="c-h5">7. Promise.allSettled</div>
+                    <p>
+                        <code>Promise.allSettled()</code>的入参和<code>Promise.all、Promise.race</code>一样，接受一个<code>promise</code>
+                        对象的数组作为参数,也是同时开始、并行执行的。但是<code>Promise.allSettled</code>的返回值需要注意以下几点：
+                    </p>
+                    <p>
+                        <code>Promise.allSettled</code>不会走进catch，当所有输入<code>Promise</code>都被履行或者拒绝时，<code>
+                            statusesPromise
+                        </code>会解析一个具有具体完成状态的数组
+                    </p>
+                    <div>
+                        <ul>
+                            <li><code>{ status: 'fulfilled', value:value } </code>：如果相应的<code>promise</code>被履行</li>
+                            <li><code>{ status: 'rejected', reason: reason }</code>：如果相应的<code>promise</code>被拒绝</li>
+                        </ul>
+                    </div>
+                    <p>我们看下面示例:</p>
+                    <WebPrismEditor v-model="PromiseAllSettled"></WebPrismEditor>
+                    <p>总结一下：<code>Promise.allSettled()</code>在你需要执行平行和独立的异步操作并收集所有结果时非常有效，
+                        即使某些异步操作可能失败。</p>
                 </section>
                 <section>
                     <div class="c-h5">8. Promise.race</div>
+                    <p class="indent">
+                        <code>Promise.rece()</code>的使用方法和 <code>Promise.all</code>一样，接收一个<code>promise</code>
+                        对象的数组为参数，<code>Promise.race</code>是要有一个promise对象进入<code>Fulfilled</code>或者
+                        <code>Rejected</code>状态的话，就会继续进行后面的处理。这里依旧有两个点要注意：
+                    </p>
+                    <div>
+                        <ul>
+                            <li>和<code>Promise.all</code>一样是所有数组当中的<code>Promise</code>同时并行的</li>
+                            <li><code>Promise.race</code> 在第一个<code>Promise</code>对象变为<code>Fulfilled</code>之后，并不会
+                                取消其他<code>promise</code>对象的执行。</li>
+                            <li><code>Promise.race</code>接受的是一个<code>Promise</code>对象数组，但是返回的确实最先完成<code>Fulfilled</code>
+                                或者最先被<code>Rejected</code>的一个Promise的结果
+                            </li>
+                        </ul>
+                    </div>
+                    <p>下面我们来举个例子：</p>
+                    <WebPrismEditor v-model="PromiseRace"></WebPrismEditor>
+                    <p>这里我们再复习一下<code>Node</code>当中事件循环的知识：</p>
+                    <div>
+                        <ul>
+                            <li>第一层循环：i为0时，异步触发了<code>Promise.race().catch()</code>，这里面的回调代码被放在了微任务队列中，
+                                后面的3个<code>setTimeout</code>宏任务的回调函数代码被放进了<code>timer</code>阶段中的队列当中(其实并不是这样，因为
+                                三个定时器都有延迟，都是在后面的事件循环中添加进来的)
+                            </li>
+                            <li>第二层循环：清空微任务对列，所以控制台打印出了错误，然后清空宏任务，分别打印出<code>3000/5000/7000</code></li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <div class="c-h5">9. Promise.any</div>
+                    <p>
+                        <code>Promise.any</code>的入参和<code>Promise.all、Promise.race、Promise.allSettled</code>一样，
+                        接收一个<code>promise</code>对象的数组作为参数。
+                    </p>
+                    <div>
+                        <ul>
+                            <li>只要其中有一个<code>Promise</code>成功执行，就会返回已经成功执行的<code>Promise</code>的结果</li>
+                            <li>如果这个<code>promise</code>对象的数组中没有一个<code>promise</code>
+                                可以成功执行（即所有的 <code>promise</code>都失败 ），就返回一个失败的<code>promise</code>
+                                和<code>AggregateError</code>类型的实例，它是<code>Error</code>的一个子类，用于把单一的错误集合
+                                在一起
+                            </li>
+                        </ul>
+                    </div>
+                    <WebPrismEditor v-model="PromiseAny"></WebPrismEditor>
+                    <p>
+                        总计一下<code>Promisea.any</code>的应用场景：如果我们现在有多台服务器，则尽量使用响应速度最快的服务器，在这种情况下，
+                        可以使用<code>Promise.any()</code>方法从最快的服务器接收响应。
+                    </p>
                 </section>
             </div>
-            <h4 id="ErrorCapture">
-                <RouterLink to="#ErrorCapture" class="a-link">#</RouterLink>4、错误捕获
-            </h4>
+            <div>
+                <h4 id="ErrorCapture">
+                    <RouterLink to="#ErrorCapture" class="a-link">#</RouterLink>4、错误捕获
+                </h4>
+                <section>
+                    <div class="c-h5">1. 使用reject而不是throw</div>
+                    <p class="indent">
+                        在最开始我们先来一句比较重要的话：<code>Promise</code>的构造函数，以及被<code>then</code>调用执行的函数基本上都可以认为是
+                        在<code>try...catch</code>代码块中执行的，所以在这些代码中即使使用<code>throw</code>，程序本身也不会异常而终止。
+                    </p>
+                    <p class="indent">
+                        所以其实如果在<code>Promise</code>中使用<code>throw</code>语句的话，会被<code>try...catch</code>住，最终<code>Promise</code>
+                        对象也会变为<code>Rejected</code>状态。但是我们为什么还是推荐使用<code>Promise.reject</code>呢？有下面两个原因：
+                    </p>
+                    <div>
+                        <ul>
+                            <li>我们很难区分<code>throw</code>是我们主动抛出来的，还是因为真正的其他异常导致的，无法主动决定，属于被动。</li>
+                            <li><code>Promise</code>构造函数当中通过<code>throw</code>抛出来的错误未必会被<code>Promise.catch</code>
+                                捕获到
+                            </li>
+                        </ul>
+                    </div>
+                    <p>下面我们就说说什么时候通过<code>throw</code>抛出的错误未必会被<code>Promise.catch</code>捕获到：</p>
+                    <WebPrismEditor v-model="PromiseErrorCatch" />
+                    <p>这个例子非常典型，想知道为什么错误没有被<code>catch</code>住，我们要到推出原因：</p>
+                    <div>
+                        <ul>
+                            <li>首先我们要明确的是，不论是<code>then</code>还是<code>catch</code>中注册的回调函数，都是由<code>Promise</code>
+                                状态的变化触发的，现在也就说<code>Promise</code>状态始终在<code>pending</code>状态。
+                            </li>
+                            <li>
+                                其次，前面不是说<code>reject</code>和<code>throw</code>都能最终让<code>Promise</code>进入<code>onReject</code>
+                                状态，这里的<code>throw</code>为什么没有改变<code>Promise</code>的状态。
+                            </li>
+                            <li>
+                                原因还是要从事件循环来说，我们好好想想，这段代码在第一轮的事件循环当中<code>setTimeout</code>的回调函数被放在了
+                                <code>timer</code>阶段的队列当中，但是它没有执行啊，所以第一轮的<code>Promise</code>状态一直处于<code>pending</code>
+                                ，所以<code>then</code>和<code>catch</code>部分的代码全部没有触发，也就在第一轮事件循环当中跳过了。然后在第二轮
+                                循环当中才执行了<code>throw</code>语句，把错误直接抛到了全局，就直接报错。所以上面的代码和下面效果一样，catch怎么可能
+                                捕获到在它后面执行的代码呢？
+                            </li>
+                        </ul>
+                    </div>
+                    <WebPrismEditor v-model="PromiseErrorCatchTwo" />
+                </section>
+                <section>
+                    <div class="c-h5">2. 在then中进行reject</div>
+                    <p class="indent">如果我们想在<code>then</code>当中使用<code>reject</code>，首先我们要懂两个知识点：</p>
+                    <div>
+                        <ul>
+                            <li>
+                                <code>then</code>中的回调函数中，<code>return</code>的返回值类型不光是简单的字面值，还可以是复杂的对象类型，
+                                比如<code>Promise</code>对象等。
+                            </li>
+                            <li>
+                                只要修改这个返回的<code>Promise</code>的状态，在下一个<code>then</code>中注册的回调函数中的<code>onFulfilled</code>
+                                和<code>onRejected</code>的哪一个会被调用也是能确定的
+                            </li>
+                        </ul>
+                    </div>
+                    <p>所以我们可以这样写代码就能在<code>then</code>当中使用<code>reject</code>:</p>
+
+                </section>
+
+            </div>
             <h4 id="ReturnValue">
                 <RouterLink to="#ReturnValue" class="a-link">#</RouterLink>5、返回值
             </h4>
@@ -794,12 +924,12 @@ var promise1 = new Promise((resoleve, reject) => {
 });
 var promise2 = new Promise((resoleve, reject) => {
   setTimeout(() => {
-    resoleve("promise1--1000");
+    resoleve("promise2--1000");
   }, 1000);
 });
 var promise3 = new Promise((resoleve, reject) => {
   setTimeout(() => {
-    resoleve("promise1--5000");
+    resoleve("promise3--5000");
   }, 5000);
 });
 
@@ -812,6 +942,122 @@ Promise.all(promiseArr)
   })
   .catch((err) => console.log(err));
 `)
+
+const PromiseRace = $builtIn(`
+let arr = [1000, 3000, 5000, 7000];
+let promiseArr = [];
+
+for (let i = 0; i < arr.length; i++) {
+  let newPromise = new Promise((resolve, reject) => {
+    if (i === 0) {
+      reject(new Error("第二个错误"));
+    } else {
+      setTimeout(() => {
+        console.log(arr[i]);
+        resolve(arr[i]);
+      }, arr[i]);
+    }
+  });
+  promiseArr.push(newPromise);
+}
+
+Promise.race(promiseArr)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+// 控制台报错
+// 3000
+// 5000
+// 7000
+`)
+
+const PromiseAllSettled = $builtIn(`
+var promise1 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    reject(new Error("promise1--3000"));
+    // resoleve("promise1--3000");
+  }, 3000);
+});
+var promise2 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    // reject(new Error("promise1--1000"))
+    resoleve("promise2--1000");
+  }, 1000);
+});
+var promise3 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    resoleve("promise3--5000");
+    // reject(new Error("promise1--5000"))
+  }, 5000);
+});
+var promiseArr = [promise1, promise2, promise3];
+console.time("promiseArr");
+Promise.allSettled(promiseArr)
+  .then((res) => {
+    console.log("res", res);
+    console.timeEnd("promiseArr");
+  })
+  .catch((err) => console.error(err))
+  .finally(() => console.log("finally"));
+`)
+
+const PromiseAny = $builtIn(`
+var promise1 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    // reject(new Error("promise1--3000"));
+    resoleve("promise1--3000");
+  }, 3000);
+});
+var promise2 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    // reject(new Error("promise2--1000"))
+    resoleve("promise1--1000");
+  }, 1000);
+});
+var promise3 = new Promise((resoleve, reject) => {
+  setTimeout(() => {
+    // resoleve("promise3--5000");
+    reject(new Error("promise1--5000"))
+  }, 5000);
+});
+var promiseArr = [promise1, promise2, promise3];
+console.time("promiseArr");
+Promise.any(promiseArr)
+  .then((res) => {
+    console.log("res", res); // res promise1--1000
+    console.timeEnd("promiseArr");
+  })
+  .catch((err) => console.error(err)); 
+  //所有的Promise都失败， AggregateError: All promises were rejected
+`)
+
+const PromiseErrorCatch = $builtIn(`
+var p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    throw new Error("async error");
+  }, 500);
+});
+
+p1.then((res) => {
+  console.log("res--", res);
+}).catch((err) => {
+  console.error("err--", err);
+});
+// 会直接报错，不会走到 catch
+`)
+
+const PromiseErrorCatchTwo = $builtIn(`
+var p1 = new Promise(function(resolve, reject) {
+})
+.then(res => {
+})
+.catch(err => {
+})
+throw Error('async error')   `)
 </script>
 
 <style lang="scss">

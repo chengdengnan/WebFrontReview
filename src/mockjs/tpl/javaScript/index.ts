@@ -85,8 +85,8 @@ const dataSource: Array<GlobalSidebar> = [
                     {
                         id: 10,
                         parentId: 1,
-                        hashId: 'EightMethods',
-                        title: '八大方法'
+                        hashId: 'NineMethods',
+                        title: '九大方法'
                     },
                     {
                         id: 11,
