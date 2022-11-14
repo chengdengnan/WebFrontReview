@@ -562,7 +562,7 @@ function funs(){
 };
 funs();
 
-// 'use stract' 【undefined】
+// 'use strict' 【undefined】
 function stractDemo(){
     'use strict'
     console.log(this);
