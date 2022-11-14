@@ -101,16 +101,28 @@ const dataSource: Array<GlobalSidebar> = [
                         title: '返回值'
                     },
                     {
-                        id: 13,
+                        id: 14,
                         parentId: 1,
-                        hashId: 'WritePromise',
-                        title: '手写Promise'
+                        hashId: 'Async',
+                        title: 'async'
                     },
                     {
                         id: 14,
                         parentId: 1,
-                        hashId: 'AsyncAwait',
-                        title: 'async和await'
+                        hashId: 'Await',
+                        title: 'await'
+                    },
+                    {
+                        id: 14,
+                        parentId: 1,
+                        hashId: 'AsyncAwaitErrorCatch',
+                        title: 'async和await错误处理'
+                    },
+                    {
+                        id: 14,
+                        parentId: 1,
+                        hashId: 'AsyncAwaitLoop',
+                        title: 'async和await循环中使用'
                     },
                 ]
             },

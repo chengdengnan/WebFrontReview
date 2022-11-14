@@ -72,9 +72,9 @@ $border-color: var(--color-success);
 
   // 重点标红加粗
   .red {
-    font-size: 0.9em;
+    font-size: inherit;
     color: red;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   // 外链
@@ -91,14 +91,14 @@ $border-color: var(--color-success);
     text-indent: 32px;
   }
 
-  // 二级内容
+  // 二级内容块
   section:not(.custom) {
     font-size: 0.9em;
     padding-left: 3rem;
     padding-top: 1rem;
     // padding-bottom: 0.5rem;
     p:not(.custom) {
-      // padding-bottom: 0.5rem;
+      padding: 3px 0;
     }
     // 二级内容下的ul
     ul:not(.custom) {
@@ -108,7 +108,7 @@ $border-color: var(--color-success);
         margin: 5px 0;
       }
     }
-    // 三级内容
+    // 三级内容块
     section:not(.custom) {
       font-size: 0.9em;
       padding-top: 0rem;
