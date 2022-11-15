@@ -103,23 +103,24 @@ onBeforeMount(() => {
     border-right: 1px solid #eaecef;
 
     &-link {
-        padding: 1.5rem 0;
+        // padding: 1.5rem 0;
+        padding: 1rem 0 1.5rem 0;
 
         .sidebar-group {
             display: block;
 
             .sidebar-group-items {
-                font-size: .95em;
+                font-size: .95rem;
                 overflow: hidden;
             }
 
             .sidebar-links {
                 .sidebar-sub-headers {
                     padding-left: 1rem;
-                    font-size: .95em;
+                    font-size: .95rem;
 
                     .sidebar-sub-header {
-                        font-size: .95em;
+                        font-size: .95rem;
 
                         .sidebar-link {
                             padding-top: 0.25rem;
@@ -132,7 +133,7 @@ onBeforeMount(() => {
                 }
 
                 .sidebar-link {
-                    font-size: 1em;
+                    font-size: .8rem;
                     font-weight: 400;
                     display: inline-block;
                     color: #2c3e50;
@@ -156,7 +157,7 @@ onBeforeMount(() => {
 
             .sidebar-heading {
                 color: var(--sidebar-head-default);
-                font-size: 1.1em;
+                font-size: 1.1rem;
                 font-weight: 700;
                 padding: 0.35rem 1.5rem 0.35rem 1.25rem;
                 margin: 0;

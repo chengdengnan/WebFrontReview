@@ -62,10 +62,10 @@ onBeforeMount(() => {
     width: 100%;
     position: relative;
     white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
     overflow: hidden;
-
-    .sub-title {
-        margin-left: 30px;
-    }
 }
 </style>

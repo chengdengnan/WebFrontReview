@@ -10,7 +10,8 @@
             </span>
         </section>
         <section class="navbar-search">
-            <el-input v-model="keyword" size="large" placeholder="Please input Keywords">
+            <el-input v-model="keyword" size="large" :clearable="true" placeholder="Please input Keywords"
+                style="width: 65%;">
                 <template #prefix>
                     <el-icon class="el-input__icon">
                         <search />
@@ -54,8 +55,10 @@ const redirectIndex = () => {
     flex-wrap: nowrap;
 
     &-avatar {
-        width: 20%;
+        flex-grow: 4;
+        float: right;
         margin: 0 auto;
+        padding-left: 1%;
 
         .header-title {
             margin-left: 1.5rem;
@@ -67,13 +70,16 @@ const redirectIndex = () => {
     }
 
     &-search {
-        width: 16%;
-        margin-left: 10%;
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 4;
+
+        // margin-left: 9%;
     }
 
     &-dropDown {
-        width: 50%;
-        overflow: hidden;
+        flex-grow: 5;
+        // width: 50%;
     }
 }
 </style>
