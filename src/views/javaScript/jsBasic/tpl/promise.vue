@@ -521,14 +521,14 @@
           <div class="c-h5">2. async函数的返回值</div>
           <p>其实<code>async</code>返回值有下面这四种情况：</p>
           <div>
-            <p class="indent">① 返回值是<code>Promise</code>对象</p>
+            <p class="indent c-h6">① 返回值是<code>Promise</code>对象</p>
             <section>
               <p>这种情况是最常见，也是符合<code>async</code>定义的</p>
               <WebPrismEditor v-model="AsyncReturnValue" />
             </section>
           </div>
           <div>
-            <p class="indent">② 返回值是普通值</p>
+            <p class="indent c-h6">② 返回值是普通值</p>
             <section>
               <p>如果<code>return</code>出来一个普通值，会被包装成一个<code>Promise</code>对象。该<code>Promise</code>
                 状态为<code>fulfilled</code>，该<code>Promise</code>的值为该简单值。可以使用<code>.then()</code>
@@ -537,7 +537,7 @@
             </section>
           </div>
           <div>
-            <p class="indent">③ 返回值是Error类型</p>
+            <p class="indent c-h6">③ 返回值是Error类型</p>
             <section>
               <p>如果<code>return</code>出来是一个<code>Error</code>类型，则同样会被包装成一个<code>Promise</code>对象，
                 该<code>Promise</code>对象的状态是<code>reject</code>，值是<code>Error</code>的信息，想取出来该<code>Promise</code>
@@ -546,19 +546,141 @@
               <WebPrismEditor v-model="AsyncReturnErrorValue" />
             </section>
           </div>
+          <div>
+            <p class="indent c-h6">④ 没有返回值</p>
+            <section>
+              <p>
+                如果没有<code>return</code>任何东西，则同样会返回一个<code>Promise</code>对象。该<code>Promise</code>
+                对象的状态为<code>fulfilled</code>，该<code>Promise</code>的值为<code>undefined</code>。
+              </p>
+              <WebPrismEditor v-model="AsyncNotReturnValue" />
+            </section>
+          </div>
         </div>
 
       </section>
     </div>
-    <h4 id="Await">
-      <RouterLink to="#Await" class="a-link">#</RouterLink>8、await
-    </h4>
-    <h4 id="AsyncAwaitErrorCatch">
-      <RouterLink to="#AsyncAwaitErrorCatch" class="a-link">#</RouterLink>7、async和await错误处理
-    </h4>
-    <h4 id="AsyncAwaitLoop">
-      <RouterLink to="#AsyncAwaitLoop" class="a-link">#</RouterLink>7、async和await循环中使用
-    </h4>
+    <div>
+      <h4 id="Await">
+        <RouterLink to="#Await" class="a-link">#</RouterLink>8、await
+      </h4>
+      <section>
+        <p><code>await</code>关键字，它只能在<code>async</code>函数内部使用，让我们可以等待一个<code>Promise</code></p>
+        <p>如果在<code>async</code>函数外使用<code>Promise</code>，我们依然需要使用<code>then</code>和回调函数
+          ，例如普通函数和全局函数。所以目前取出<code>Promise</code>对象值的两种方法：<code>.then 和 await</code>
+        </p>
+        <div>
+          <div class="c-h5">1. 最大作用</div>
+          <p><code>await</code>最大的作用就是代替<code>.then()</code>方法，让整个成为同步的写法，更容易理解</p>
+          <div>
+            <p class="indent c-h6">① 串行异步</p>
+            <section>
+              <p>当串联异步的操作时，<code>await</code>要比<code>.then()</code>方法更加简洁。</p>
+              <WebPrismEditor v-model="AwaitListPromise" />
+            </section>
+          </div>
+          <div>
+            <p class="indent c-h6">① 并行异步</p>
+            <section>
+              <p>虽然并行异步的代码还是离不开<code>Promise.all</code>或者<code>Promise.race</code>方法，但是用来处理
+                最终的并行结果的代码也是很简洁的。
+              </p>
+              <WebPrismEditor v-model="AwaitParallelPromise" />
+            </section>
+          </div>
+        </div>
+        <div>
+          <div class="c-h5">2. await本质</div>
+          <p>从上面我们列出的这么多代码来看，<code>await</code>本质就是<code>.then</code>方法的语法糖。事实上
+            ，<code>async/await</code>其实会编译为<code>Promise</code>与<code>then</code>回调。每次我们使用
+            <code>await</code>，解释器会创建一个<code>Promise</code>然后把<code>async</code>函数中的后续代码(
+            也就是书写在<code>await</code>后面的代码 )放在<code>then</code>回调中，并被计划在<code>Promise</code>
+            完成之后执行。所以下面两段代码是等价的
+          </p>
+          <WebPrismEditor v-model="AwaitEssence" />
+          <p>所以<code>await</code>关键字给我们的感觉是会让代码执行到<code>await</code>这一行的时候，“暂停执行”
+            ，等到异步操作有了结果，再继续往下执行。那么问题来了，
+            <span class="red"><code>await</code> 关键字会阻塞线程吗？</span>不会，因为还是我们上面说的那句话：
+            <span class="red"><code>await</code>本质上是<code>.then()</code>的语法糖，<code>await</code>并没有
+              改变<code>JavaScript</code>单线程的本质，没有改变<code>event Loop</code>的模型，只是方便我们写代码，更快捷
+              ， 更清晰。</span>如下所示：
+          </p>
+          <WebPrismEditor v-model="AwaitEssenceTwo" />
+          <p>所以通过上面这一段代码我们就能 <span class="red">明白</span> ：</p>
+          <br />
+          <p>
+            <code>await</code>关键字不会阻塞<code>js</code>的<code>event loop</code>线程。当代码执行到<code>async</code>
+            函数遇到<code>await</code>关键词时，不会继续往下执行，而是会发起异步调用，推入异步任务队列，等待异步处理。
+            但是此时<code>node</code>线程并不会闲着，而是继续执行<code>async</code>函数被调用的哪一行下面的代码。等到异步
+            操作的结果发生了变化时，将异步结果推入任务队列，<code>event loop</code>从队列中取出事件，推入的执行栈中。
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <h4 id="AsyncAwaitErrorCatch">
+        <RouterLink to="#AsyncAwaitErrorCatch" class="a-link">#</RouterLink>8、async和await错误处理
+      </h4>
+      <section>
+        <div>
+          <p class="c-h5">1. try-catch</p>
+          <p>因为当我们使用<code>async/await</code>的时候我们的代码是同步的写法，同步的错误处理理所应当会先想到的就是
+            <code>try/catch</code>，所以对于<code>async/await</code>的处理我们可以采用<code>try/catch</code>。
+          </p>
+          <WebPrismEditor v-model="AwaitTryCatch" />
+          <p>
+            实际通过上述代码可以看到：<code>try/catch</code>的方法在对于错误类型单一的情况下是简洁明了的，但是如果是
+            不同类型的错误类型，如果我们还采用<code>try/catch</code>的方法也不是不行，只能在错误处理的代码上就要分类处理
+            ，还不一定能准确知道是那个请求方法出了问题，所以使用<code>try/catch</code>在多类型错误的分析和定位是上是吃亏的：
+          </p>
+          <WebPrismEditor v-model="AwaitTryCatchTwo" />
+        </div>
+        <div>
+          <p class="c-h5">2. .then和.catch方法输出值</p>
+          <p>
+            针对<code>try/catch</code>的问题我们希望就是在有不同类型错误可能出现的情况下，我们还是能准备并分别不同的类型
+            做处理。而<code>async/await</code>本质就是<code>Promise</code>的语法糖，既然是<code>Promise</code>那么
+            就可以使用<code>then</code>函数和<code>catch</code>函数，通过<code>then</code>和<code>catch</code>
+            输出值。
+          </p>
+          <WebPrismEditor v-model="AwaitThenCatch" />
+          <p>当在处理不同类型的错误的时候，我么就能分别在对应的不同的<code>Promise</code>的链的末尾
+            <code>catch</code>当中书写不同的处理函数
+          </p>
+          <WebPrismEditor v-model="AwaitThenCatchTwo" />
+        </div>
+        <div>
+          <p class="c-h5">3. 更优雅的方式</p>
+          <p>使用
+            <code>then</code>和<code>catch</code>函数及数组解构，区分正常和异常结果，封装公共处理函数。
+          </p>
+          <WebPrismEditor v-model="AwaitGracefulError" />
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <h4 id="AsyncAwaitLoop">
+        <RouterLink to="#AsyncAwaitLoop" class="a-link">#</RouterLink>9、async和await循环中使用
+      </h4>
+      <section>
+        <p>参考资料: <a target="_blank" rel="help" href="https://juejin.cn/post/6844903860079738887"
+            class="a-navigation">如何在 JS
+            循环中正确使用 async 与 await</a>
+        </p>
+        <div>
+          <ul>
+            <li>如果你想连续执行 <code>await</code>调用，请使用<code>for</code>循环(或者没有任何回调的循环)。</li>
+            <li>永远不要和<code>forEach</code>一起使用<code>await</code>，而是使用<code>for</code>循环(或者没有任何回调的循环)。</li>
+            <li>不要在<code>filter</code>和<code>reduce</code>中使用<code>await</code>，如果需要，先用<code>map</code>
+              进一步处理，然后再使用<code>filter</code>和<code>reduce</code>进行处理。
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
 
   </div>
 </template>
@@ -986,6 +1108,215 @@ f1().catch(function (e) {
   console.log(e);
 });
 `)
+const AsyncNotReturnValue = $builtIn(`
+var p1 = new Promise((resolve, reject) => {
+  resolve();
+});
+p1.then((res) => console.log("p1", res));
+
+async function p2() {
+  await (1 + 1);
+}
+(async () => {
+  console.log("p2", p2());
+})();
+`)
+
+const AwaitListPromise = $builtIn(`
+var asyncFunc1 = function () {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("asyncFunc1");
+    }, 1000);
+  });
+};
+var asyncFunc2 = function () {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("asyncFunc2");
+    }, 1000);
+  });
+};
+
+// 使用 .then 进行串联操作
+function asyncF() {
+  asyncFunc1()
+    .then((res) => {
+      console.log("res", res);
+      return asyncFunc2();
+    })
+    .then((res2) => {
+      console.log("res2", res2);
+    });
+}
+asyncF();
+
+// 使用 await 关键字
+async function asyncF2() {
+  let res = await asyncFunc1();
+  let res2 = await asyncFunc2();
+  console.log("res", res);
+  console.log("res2", res2);
+}
+asyncF2();
+`)
+
+const AwaitParallelPromise = $builtIn(`
+var asyncFunc1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("asyncFunc1");
+  }, 1000);
+});
+
+var asyncFunc2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("asyncFunc2");
+  }, 1000);
+});
+
+// 使用 .then 进行串联操作
+function asyncF() {
+  // [ res1, res2 ] 结构
+  Promise.all([asyncFunc1, asyncFunc2]).then(([res1, res2]) => {
+    console.log("asyncF", res1, res2);
+  });
+}
+asyncF();
+
+// 使用 await 关键字
+async function asyncF2() {
+  let [res1, res2] = await Promise.all([asyncFunc1, asyncFunc2]);
+  console.log("asyncF2", res1, res2);
+}
+asyncF2();
+`)
+
+const AwaitEssence = $builtIn(`
+// await写法
+await foo();         
+console.log("hello");
+
+// .then写法
+foo().then(() => {
+    console.log("hello");
+});
+`)
+
+
+const AwaitEssenceTwo = $builtIn(`
+var p1 = new Promise((resolve, reject) => {
+  console.log(1);
+  setTimeout(() => {
+    resolve(6);
+  }, 1000);
+});
+
+async function multipleRequestAsync() {
+  console.log(3);
+  let result = await p1;
+  console.log(result);
+  console.log(7);
+}
+console.log(2);
+multipleRequestAsync();
+console.log(4);
+console.log(5);
+
+// 1 2 3 4 5 6 7
+`)
+
+const AwaitTryCatch = $builtIn(`
+(async () => {
+  const _fetch = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject("reject promise");
+      }, 1000);
+    });
+  };
+
+  try {
+    let result = await _fetch();
+    console.log("result", result);
+  } catch (err) {
+    console.log("err", err);
+  }
+})();
+`)
+
+const AwaitTryCatchTwo = $builtIn(`
+try {
+    let result = await fsData()        // 读取文件
+    let result = await requestData()   // 网络请求
+    let result = await readDb()        // 读取数据库
+} catch (error) {
+    // 不同的错误进行分类
+}
+`)
+
+const AwaitThenCatch = $builtIn(`
+(async () => {
+  const _fetch = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject("reject promise");
+      }, 1000);
+    });
+  };
+
+  let result = await _fetch()
+    .then((res) => res)
+    .catch((err) => console.log(err));
+  console.log("result", result);
+})();
+`)
+
+const AwaitThenCatchTwo = $builtIn(`
+const data = await fsData().then(data => data ).catch(err => // 文件读取错误的处理)
+const data = await requestData().then(data => data ).catch(err => // 网络请求错误的处理)
+const data = await readDb().then(data => data ).catch(err => // 数据库读写错误的处理)
+`)
+
+const AwaitGracefulError = $builtIn(`
+(async () => {
+  function handleError(err) {
+    if (err !== null) {
+      console.log("err", err);
+      // 具体错误处理逻辑，Tip 还是？
+    }
+  }
+
+  function handleData(data) {
+    if (data !== null) {
+      // 具体处理结果
+    }
+  }
+  const _fetch = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject("reject promise");
+      }, 1000);
+    });
+  };
+
+  const [err, data] = await _fetch()
+    .then((data) => [null, data])
+    .catch((err) => [err, null]);
+  handleData(data);
+  handleError(err);
+
+  // 抽离成公共方法
+
+  const awaitWrap = (promise) => {
+    return promise.then((data) => [null, data]).catch((err) => [err, null]);
+  };
+  const [err1, data1] = await awaitWrap(_fetch());
+  handleData(data1);
+  handleError(err1);
+})();
+`)
+
+
 </script>
 
 <style lang='scss'>

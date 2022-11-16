@@ -136,9 +136,10 @@ const handleRun = () => {
 
     /* you must provide font-family font-size line-height. Example: */
     font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    padding: 5px;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    padding: 5px !important;
+    border-radius: 8px;
 }
 
 /* optional class for removing the outline */
