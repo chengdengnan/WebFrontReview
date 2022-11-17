@@ -10,12 +10,7 @@
 
 
         <!-- ------------- 3、Generator --------------- -->
-        <div>
-            <h3 id="Generator">3、Generator</h3>
-            <h4 id="Iterator">1、迭代器Iterator</h4>
-            <h4 id="SubGenerator">2、生成器Generator</h4>
-            <h4 id="AutoGenerator">3、Generator自动执行</h4>
-        </div>
+        <CustomGenerator></CustomGenerator>
 
         <!-- ------------- DeepClone --------------- -->
 
@@ -27,7 +22,7 @@
 import { getCurrentInstance } from "vue"
 import CustomThis from "./tpl/this.vue"
 import CustomPromise from "./tpl/promise.vue"
-
+import CustomGenerator from "./tpl/generator.vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;
 

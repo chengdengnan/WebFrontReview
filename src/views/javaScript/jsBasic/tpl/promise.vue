@@ -457,7 +457,7 @@
     </div>
     <div>
       <h4 id="Async">
-        <RouterLink to="#Async" class="a-link">#</RouterLink>7、async
+        <RouterLink to="#Async" class="a-link">#</RouterLink>6、async
       </h4>
       <section>
         <p><code>co</code>模块的语法糖（用于 <code>Generator</code> 函数的自动执行）</p>
@@ -562,7 +562,7 @@
     </div>
     <div>
       <h4 id="Await">
-        <RouterLink to="#Await" class="a-link">#</RouterLink>8、await
+        <RouterLink to="#Await" class="a-link">#</RouterLink>7、await
       </h4>
       <section>
         <p><code>await</code>关键字，它只能在<code>async</code>函数内部使用，让我们可以等待一个<code>Promise</code></p>

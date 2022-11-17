@@ -1,122 +1,131 @@
 // 20: sidebar 18 + padding 2
 $border-color: var(--color-success);
 .main {
-  max-width: 100%;
-  width: calc(100% - 5rem);
-  min-width: calc(100% - 20rem);
-  padding: 0 1.7rem;
-  padding-bottom: 2rem;
-  font-size: 0.9rem;
-  // 代码块
-  .prism-editor {
-    width: calc(100% - 10rem);
-  }
-  h2:not(.custom){
-    font-size: 1.5rem !important;
-  }
-  // 一级标题
-  h3:not(.custom) {
-    font-size: 1.4rem !important;
-    position: relative;
-    padding-top: 1rem;
-    margin-left: 1rem;
-    border-bottom: 1px solid #eaecef;
-  }
-  // 二级标题
-  h4:not(.custom) {
-    font-size: 1.3rem;
-    position: relative;
-    padding-top: 1rem;
-    padding-left: 2rem;
-  }
-  // 三级标题
-  .c-h5 {
-    font-size: 1.1rem !important;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  // 四级标题
-  .c-h6 {
-    font-size: 0.95rem !important;
-    font-weight: 600;
-    margin: 10px 0;
-  }
-  // 一级内容下的直接子元素
-  div > ul {
-    padding-left: 1.5rem;
-  }
-
-  // 一级、二级、三级、四级 title style
-  h2,
-  h3,
-  h4,
-  .c-h5 {
-    .a-link {
-      opacity: 0;
-      float: left;
-      font-size: 0.85em;
-      text-align: center;
-      color: var(--color-success);
-      margin-left: -0.87em;
-      padding-right: 0.23em;
-      margin-top: 0.125em;
-      transition: opacity 0.5s linear;
-      &:hover {
-        cursor: pointer;
-        border-bottom: 2px solid $border-color;
-      }
-    }
-    &:hover {
-      .a-link {
-        opacity: 1;
-      }
-    }
-  }
-
-  // 重点标红加粗
-  .red {
-    font-size: inherit;
-    color: red;
-    font-weight: 600;
-  }
-
-  // 外链
-  .a-navigation {
-    font-size: 0.9em;
-    display: inline-block;
-    color: $border-color;
-    margin-left: 10px;
-    padding-bottom: 8px;
-  }
-
-  // 首字符缩进
-  .indent {
-    text-indent: 32px;
-  }
-
-  // 二级内容块
-  section:not(.custom) {
+    max-width: 100%;
+    width: calc(100% - 5rem);
+    min-width: calc(100% - 20rem);
+    padding: 0 1.7rem;
+    padding-bottom: 2rem;
     font-size: 0.9rem;
-    padding-left: 3rem;
-    padding-top: 1rem;
-    // padding-bottom: 0.5rem;
-    p:not(.custom) {
-      font-size: 0.9rem;
-      padding: 3px 0;
+    // 代码块
+    .prism-editor {
+        width: calc(100% - 10rem);
     }
-    // 二级内容下的ul
-    ul:not(.custom) {
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      li {
-        margin: 5px 0;
-      }
+    // 简介
+    .brief-introduction {
+        width: 100%;
+        text-indent: 32px;
+        .right {
+            text-align: right;
+        }
     }
-    // 三级内容块
+    h2:not(.custom) {
+        font-size: 1.5rem !important;
+    }
+
+    // 一级标题
+    h3:not(.custom) {
+        font-size: 1.4rem !important;
+        position: relative;
+        padding-top: 1rem;
+        margin-left: 1rem;
+        border-bottom: 1px solid #eaecef;
+    }
+    // 二级标题
+    h4:not(.custom) {
+        font-size: 1.3rem;
+        position: relative;
+        padding-top: 1rem;
+        padding-left: 2rem;
+    }
+    // 三级标题
+    .c-h5 {
+        font-size: 1.1rem !important;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    // 四级标题
+    .c-h6 {
+        font-size: 0.95rem !important;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+    // 一级内容下的直接子元素
+    div > ul {
+        padding-left: 1.5rem;
+    }
+
+    // 一级、二级、三级、四级 title style
+    h2,
+    h3,
+    h4,
+    .c-h5 {
+        .a-link {
+            opacity: 0;
+            float: left;
+            font-size: 0.85em;
+            text-align: center;
+            color: var(--color-success);
+            margin-left: -0.87em;
+            padding-right: 0.23em;
+            margin-top: 0.125em;
+            transition: opacity 0.5s linear;
+            &:hover {
+                cursor: pointer;
+                border-bottom: 2px solid $border-color;
+            }
+        }
+        &:hover {
+            .a-link {
+                opacity: 1;
+            }
+        }
+    }
+
+    // 重点标红加粗
+    .red {
+        font-size: inherit;
+        color: red;
+        font-weight: 600;
+    }
+
+    // 外链
+    .a-navigation {
+        font-size: 0.9em;
+        display: inline-block;
+        color: $border-color;
+        margin-left: 10px;
+        padding-bottom: 8px;
+    }
+
+    // 首字符缩进
+    .indent {
+        text-indent: 32px;
+    }
+
+    // 二级内容块
     section:not(.custom) {
-      font-size: 0.9rem;
-      padding-top: 0rem;
-      padding-bottom: 0.5rem;
+        font-size: 0.9rem;
+        padding-left: 3rem;
+        padding-top: 1rem;
+        // padding-bottom: 0.5rem;
+        p:not(.custom) {
+            font-size: 0.9rem;
+            padding: 3px 0;
+        }
+        // 二级内容下的ul
+        ul:not(.custom) {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            li {
+                margin: 5px 0;
+            }
+        }
+        // 三级内容块
+        section:not(.custom) {
+            font-size: 0.9rem;
+            padding-top: 0rem;
+            padding-bottom: 0.5rem;
+        }
     }
-  }
 }
