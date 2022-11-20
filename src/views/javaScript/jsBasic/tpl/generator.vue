@@ -68,14 +68,66 @@
                     放到闭包里，然后通过闭包返回迭代器。
                 </p>
                 <WebPrismEditor v-model="CustomIterator" />
+                <p class="c-h5">如何提前终止迭代器</p>
+                <p class="indent">可选的<code>return()</code>方法用于指定在迭代器提前关闭时执行的逻辑。执行迭代的结构在
+                    想让迭代器知道他不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。可能情况包括：</p>
+                <div>
+                    <ul>
+                        <li>
+                            <code>for-of</code>循环通过<code>break、continue、return 或 throw</code>提前退出
+                        </li>
+                        <li>
+                            解构操作并未消费所有值
+                        </li>
+                    </ul>
+                </div>
+                <p>需要注意的是：<code>return()</code>方法必须返回一个有效的<code>IteratorResult</code>对象。
+                    简单情况下，可以返回<code>{ done:true }</code>。因为这个返回值只会用在生成器的上下文中。</p>
+                <WebPrismEditor v-model="CustomReturnIterator" />
+                <p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。比如：数组的迭代器就是不能关闭的：</p>
+                <WebPrismEditor v-model="ArrayIterator" />
+                <p>因为<code>return()</code>方法是可选，所以并非所有迭代器都是可以关闭的。要知道某个迭代器是否可关闭，
+                    可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。不过，仅仅给一个不可关闭的迭代器增加
+                    这个方法<span class="red">并不能</span>让它可关闭的。这是因为调用<code>return()</code>不会强制
+                    迭代器进入关闭状态。
+                </p>
             </section>
         </div>
 
+        <div>
+            <h4 id="SubGenerator">
+                <RouterLink to="#SubGenerator" class="a-link">#</RouterLink>
+                3、生成器Generator
+            </h4>
+            <section>
+                <p>生成遍历器对象的函数，使用<code>*</code>表示函数(星号可以紧挨着<code>function</code>关键字
+                    也可以在中间添加一个空格)，内部使用<code>yield</code>定义内部状态。</p>
+                <div>
+                    <ul>
+                        <li>每当执行完一条<code>yield</code>语句后，函数就会自动停止执行，直到再次调用<code>next()</code></li>
+                        <li>
+                            <code>yield</code>关键字，只可在生成器内部使用，在其他地方使用会导致程序抛出错误
+                        </li>
+                        <li>
+                            可以通过函数表达式来创建生成器，但是不能使用箭头函数
+                        </li>
+                        <li>
+                            可以在<code>generator</code>函数运行的不同阶段从外部内部注入不同的值，从而改变函数行为
+                            <div>
+                                <ul type="circle">
+                                    <li><code>yield</code>语句无返回值，总是返回<code>undefined</code>。</li>
+                                    <li><code>next</code>方法可以带一个参数，参数被当做上一条<code>yield</code>
+                                        的返回值。</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <WebPrismEditor v-model="Generator" />
 
-        <h4 id="SubGenerator">
-            <RouterLink to="#SubGenerator" class="a-link">#</RouterLink>
-            3、生成器Generator
-        </h4>
+            </section>
+        </div>
+
         <h4 id="AutoGenerator">
             <RouterLink to="#AutoGenerator" class="a-link">#</RouterLink>
             4、Generator自动执行
@@ -174,7 +226,92 @@ for (let v of counter) {
 }
 `)
 
+const CustomReturnIterator = $builtIn(`
+class Counter {
+  // counter 的实例应该被迭代 limit 次
+  constructor(limit) {
+    this.limit = limit;
+  }
 
+  [Symbol.iterator]() {
+    let count = 1;
+    let limit = this.limit;
+
+    return {
+      next() {
+        if (count <= limit) {
+          return { done: false, value: count++ };
+        } else {
+          return { done: true, value: undefined };
+        }
+      },
+      return() {
+        console.error("Exiting early");
+        return { done: true };
+      },
+    };
+  }
+}
+
+let counter = new Counter(3);
+
+for (let v of counter) {
+  if (v > 2) {
+    break;
+  }
+  console.log(v);
+}
+`)
+
+const ArrayIterator = $builtIn(`
+let a = [1, 2, 3, 4, 5];
+let iter = a[Symbol.iterator]();
+for (let i of iter) {
+  console.log(i);
+  if (i > 2) {
+    break;
+  }
+}
+// 1
+// 2
+// 3
+for (let i of iter) {
+  console.log(i);
+}
+// 4
+// 5
+`)
+
+const Generator = $builtIn(`
+function* generator() {
+  const list = [1, 2, 3];
+  for (let i of list) {
+    yield i;
+  }
+}
+
+let g = generator();
+console.log(g.next()); // { value: 1, done: false }
+console.log(g.next()); // { value: 2, done: false }
+console.log(g.next()); // { value: 3, done: false }
+console.log(g.next()); // { value: undefined, done: true }
+
+function* foo(x) {
+  var y = 2 * (yield x + 1);
+  var z = yield y / 3;
+  return x + y + z;
+}
+
+var a = foo(5);
+console.log(a.next()); // { value: 6, done: false }
+console.log(a.next()); // { value: NaN, done: false }
+console.log(a.next()); // { value: NaN, done: true }
+
+var b = foo(5);
+console.log(b.next()); // { value: 6, done: false }
+console.log(b.next()); // { value: NaN, done: false }
+console.log(b.next()); // { value: NaN, done: true }
+`)
 </script>
 
 <style lang='scss'>
