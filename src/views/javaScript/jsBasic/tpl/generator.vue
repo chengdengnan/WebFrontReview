@@ -124,14 +124,51 @@
                     </ul>
                 </div>
                 <WebPrismEditor v-model="Generator" />
-
+                <!-- throw方法 -->
+                <div>
+                    <p class="c-h5">1. throw方法</p>
+                    <p><code>Generator</code>函数返回的遍历器对象都有一个<code>throw</code>方法，可以在函数体外
+                        抛出错误，然后在<code>Generator</code>函数体内捕获。
+                    </p>
+                    <div>
+                        <ul>
+                            <li>若<code>Generator</code>函数体内部署了<code>try...catch</code>代码块，
+                                那么遍历器的<code>throw</code>方法抛出的错误不会影响下一次遍历，反之如果
+                                <code>Generator</code>函数体内没有部署<code>try...catch</code>
+                                ，使用遍历器的<code>throw</code>方法抛出的错误，遍历则会终止。
+                            </li>
+                            <li>
+                                一旦<code>Generator</code>执行过程中抛出错误，就不会再执行下去，如果后续调用
+                                <code>next</code>方法，返回<code>{ value: undefined, done: true,}</code>对象
+                            </li>
+                        </ul>
+                    </div>
+                    <WebPrismEditor v-model="GeneratorThrow" />
+                    <p>g.throw() 方法被【捕获】后会自动执行一次【next】方法，内部部署了【try...catch】
+                        遍历器的【throw】方法抛出的异常不会影响下次遍历
+                    </p>
+                    <WebPrismEditor v-model="GeneratorThrowTwo" />
+                </div>
+                <!--  -->
+                <div>
+                    <p class="c-h5">2. return方法</p>
+                    <p><code>Generator.prototype.return()</code>，返回给的值，并终结<code>Generator</code>
+                        函数的遍历
+                    </p>
+                    <WebPrismEditor v-model="GeneratorReturn" />
+                </div>
             </section>
         </div>
 
-        <h4 id="AutoGenerator">
-            <RouterLink to="#AutoGenerator" class="a-link">#</RouterLink>
-            4、Generator自动执行
-        </h4>
+        <div>
+            <h4 id="AutoGenerator">
+                <RouterLink to="#AutoGenerator" class="a-link">#</RouterLink>
+                4、Generator自动执行
+            </h4>
+            <section>
+                <WebPrismEditor v-model="AutoRunGenerator" />
+            </section>
+        </div>
     </div>
 </template>
 
@@ -312,6 +349,90 @@ console.log(b.next()); // { value: 6, done: false }
 console.log(b.next()); // { value: NaN, done: false }
 console.log(b.next()); // { value: NaN, done: true }
 `)
+
+
+const GeneratorThrow = $builtIn(`
+var gen = function* gen() {
+  try {
+    yield console.log("a");
+  } catch (e) {
+    console.log(e);
+  }
+  yield console.log("b");
+  yield console.log("c");
+};
+
+var g = gen();
+console.log(g.next()); //a { value: undefined, done: false }
+console.log(g.throw()); //undefined b { value: undefined, done: false }
+// g.throw() 方法被【捕获】后会自动执行一次【next】方法，内部部署了【try...catch】，
+// 遍历器的【throw】方法抛出的异常不会影响下次遍历
+console.log(g.next()); //b { value: undefined, done: false }
+console.log(g.next()); // { value: undefined, done: true }
+`)
+
+const GeneratorThrowTwo = $builtIn(`
+var gen = function* gen() {
+  yield console.log("a");
+  yield console.log("b");
+  throw new Error("Generator Error");
+  yield console.log("c");
+};
+
+var g = gen();
+console.log(g.next()); //a { value: undefined, done: false }
+console.log(g.next()); //b { value: undefined, done: false }
+console.log(g.next()); // Generator Error 后续不会再执行
+`)
+
+const GeneratorReturn = $builtIn(`
+var gen = function* gen() {
+  yield 1;
+  yield 2;
+  throw new Error("Generator Error");
+  yield 3;
+};
+
+var g = gen();
+console.log(g.next()); // { value: 1, done: false }
+console.log(g.return("return")); // { value: 'return', done: true }
+console.log(g.next()); // { value: undefined, done: true }
+`)
+
+const AutoRunGenerator = $builtIn(`
+function longTimeFn(time) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(time);
+    }, time);
+  });
+}
+
+// 自动执行封装，递归回调
+function asyncFun(generator) {
+  const iterator = generator(); // 接下里要执行next
+  // data 为第一次执行之后的返回结果，用于传给第二次执行
+  const next = (data) => {
+    // 第一次执行next时，yield 返回的 promise 实例赋值给了value
+    const { value, done } = iterator.next(data);
+    if (done) return;
+    value.then((data) => next(data));
+  };
+  next();
+}
+
+// 生成器函数内自动执行，无需显示next()
+
+asyncFun(function* () {
+  let data = yield longTimeFn(1000);
+  console.log(data);
+  data = yield longTimeFn(1500);
+  console.log(data);
+  return data;
+});
+`)
+
+
 </script>
 
 <style lang='scss'>

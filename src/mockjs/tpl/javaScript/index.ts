@@ -1,5 +1,6 @@
 import { GlobalSidebar, Sidebar, getCurrentTreeNode } from "../../sidebar.type";
 
+// js 杂记
 namespace InfoSidebar {
     export type InfoSidebarParams = {
         body: string;
@@ -7,7 +8,6 @@ namespace InfoSidebar {
         url: string;
     };
 }
-
 const dataSource: Array<GlobalSidebar> = [
     {
         mainTitle: "JavaScript基础问题梳理",
@@ -99,7 +99,7 @@ const dataSource: Array<GlobalSidebar> = [
                         title: "返回值"
                     },
                     {
-                        id: 14,
+                        id: 13,
                         parentId: 1,
                         hashId: "Async",
                         title: "async"
@@ -111,13 +111,13 @@ const dataSource: Array<GlobalSidebar> = [
                         title: "await"
                     },
                     {
-                        id: 14,
+                        id: 15,
                         parentId: 1,
                         hashId: "AsyncAwaitErrorCatch",
                         title: "async和await错误处理"
                     },
                     {
-                        id: 14,
+                        id: 16,
                         parentId: 1,
                         hashId: "AsyncAwaitLoop",
                         title: "async和await循环中使用"
@@ -131,25 +131,25 @@ const dataSource: Array<GlobalSidebar> = [
                 routeName: "JsBasic",
                 children: [
                     {
-                        id: 15,
+                        id: 17,
                         parentId: 2,
                         hashId: "Iterator",
                         title: "迭代器Iterator"
                     },
                     {
-                        id: 16,
+                        id: 18,
                         parentId: 2,
                         hashId: "CustomIterator",
                         title: "自定义迭代器Iterator"
                     },
                     {
-                        id: 17,
+                        id: 19,
                         parentId: 2,
                         hashId: "SubGenerator",
                         title: "生成器Generator"
                     },
                     {
-                        id: 18,
+                        id: 20,
                         parentId: 2,
                         hashId: "AutoGenerator",
                         title: "Generator自动执行"
@@ -169,7 +169,7 @@ const dataSource: Array<GlobalSidebar> = [
 
 export default {
     name: "jsBasicInfo",
-    jsBasicInfo(params: InfoSidebar.InfoSidebarParams) {
+    info(params: InfoSidebar.InfoSidebarParams) {
         const param = JSON.parse(params.body);
         if (!param) throw new Error("Params can not empty!");
         const data = dataSource.find((t: GlobalSidebar) => {
