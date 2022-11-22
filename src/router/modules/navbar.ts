@@ -37,7 +37,7 @@ const javaScript: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/javaScript/promiseApplication/index.vue"),
                 name: 'PromiseApplication',
-                meta: { title: 'Promise Application' }
+                meta: { title: 'Promise规范和应用' }
             }
         ]
     },

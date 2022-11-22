@@ -27,22 +27,16 @@ const dataSource: Array<GlobalSidebar> = [
                 title: "PromiseA+ 规范",
                 children: [
                     {
-                        id: 1000,
+                        id: 1001,
                         parentId: 101,
                         hashId: "PromiseTerm",
                         title: "术语"
                     },
                     {
-                        id: 1001,
-                        parentId: 101,
-                        hashId: "PromiseTerm",
-                        title: "Promise术语"
-                    },
-                    {
                         id: 1002,
                         parentId: 101,
                         hashId: "PromiseStates",
-                        title: "Promise状态"
+                        title: "状态"
                     },
                     {
                         id: 1003,
