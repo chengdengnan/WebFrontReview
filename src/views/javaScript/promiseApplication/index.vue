@@ -6,6 +6,12 @@
 
         <!-- Promise standard -->
         <PromiseStandard></PromiseStandard>
+
+        <!-- promise application -->
+        <PromiseApplication></PromiseApplication>
+
+        <!-- custom promise -->
+        <PromiseRealization></PromiseRealization>
     </div>
 
 </template>
@@ -13,6 +19,8 @@
 <script lang='ts' setup>
 import PromiseReference from "./tpl/promiseReference.vue"
 import PromiseStandard from "./tpl/promiseStandard.vue"
+import PromiseApplication from "./tpl/promise.vue"
+import PromiseRealization from "./tpl/promiseRealization.vue"
 import { getCurrentInstance } from "vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;

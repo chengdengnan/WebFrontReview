@@ -48,9 +48,9 @@ const dataSource: Array<GlobalSidebar> = [
             },
             {
                 id: 102,
-                hashId: "PromiseApplication",
+                hashId: "Promise",
                 routeName: "PromiseApplication",
-                title: "Promise 应用",
+                title: "Promise(异步编程)",
                 children: [
                     {
                         id: 1004,

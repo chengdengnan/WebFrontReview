@@ -154,15 +154,15 @@
                 </div>
                 <div>
                     <p class="c-h6">4. onFulfilled和onRejected应该是微任务</p>
-                    <section>
-                        <p>
+                    <div>
+                        <p class="indent">
                             在执行上下文堆栈仅包含平台代码之前，不得调用<code>onFulfilled</code>或
                             <code>onRejected</code>函数，<code>onFulfilled</code>和<code>onRejected</code>
                             必须被作为普通函数调用(即非实例化调用，这样函数内部 <code>this</code>非严格模式下
                             指向<code>window</code> )，使用<code>queueMicrotask</code>或者
                             <code>setTimeout</code>来实现微任务的调用。
                         </p>
-                    </section>
+                    </div>
                 </div>
                 <div>
                     <p class="c-h6">5. then方法可以被调用多次</p>
@@ -183,8 +183,8 @@
                 </div>
                 <div>
                     <p class="c-h6">6. then必须返回一个promise</p>
-                    <section>
-                        <p><code>then</code>必须返回一个<code>promise</code></p>
+                    <div>
+                        <p class="indent"><code>then</code>必须返回一个<code>promise</code></p>
                         <WebPrismEditor v-model="ThenReturnPromise" />
                         <div>
                             <ul>
@@ -208,13 +208,89 @@
                                 </li>
                             </ul>
                         </div>
-                    </section>
+                    </div>
                 </div>
                 <div>
-                    <p class="c-h6">7. Promise的解决过程resolvePromise</p>
-                    <section>
+                    <p class="c-h6">7. Promise 的解决过程 resolvePromise</p>
+                    <div>
+                        <WebPrismEditor v-model="ResolvePromise" />
+                        <ul>
+                            <li>
+                                如果<code>x</code>是当前<code>promise</code>本身(<code>promise2</code>和
+                                <code>x</code>相等 )，那么<code>reject TypeError</code>
+                            </li>
+                            <li>
+                                如果<code>x</code>是另一个<code>promise</code>(即<code>x</code>是一个<code>promise
+                                </code> )，那么沿用它的<code>state</code>和<code>result</code>状态。
+                                <div>
+                                    <ul type="cricle">
+                                        <li>如果<code>x</code>是<code>pending</code>状态，那么
+                                            <code>promise</code>必须要在<code>pending</code>，知道<code>x</code>变成
+                                            <code>fulfilled</code>或者<code>rejected</code>
+                                        </li>
+                                        <li>
+                                            如果<code>x</code>是<code>fulfilled</code>状态，用相同的<code>value</code>
+                                            执行<code>promise</code>
+                                        </li>
+                                        <li>
+                                            如果<code>x</code>是<code>rejected</code>状态，用相同的<code>reason</code>
+                                            拒绝<code>promise</code>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                如果<code>x</code>是一个<code>object</code>或者是一个<code>function</code>(不常见)
+                                <div>
+                                    <ul type="cricle">
+                                        <li>
+                                            首先取<code>x.then</code>的值，<code>let then = x.then</code>
+                                        </li>
+                                        <li>
+                                            如果取<code>x.then</code>这步出错抛出<code>e</code>，那么以<code>e</code>为
+                                            <code>reason</code>拒绝<code>promise</code>
+                                        </li>
+                                        <li>
+                                            如果<code>then</code>是一个函数，将<code>x</code>作为函数的作用域<code>this</code>
+                                            调用，即<code>then.call(x, resolvePromise, rejectPromise)</code>,第一个参数
+                                            叫<code>resolvePromise</code>，第二个参数叫<code>rejectPromise</code>
+                                            <div>
+                                                <ul type="square">
+                                                    <li>
+                                                        如果<code>resolvePromise</code>以<code>y</code>为参数被调用，则执行
+                                                        <code>resolvePromise(promise2, y, resolve, reject)</code>
+                                                    </li>
+                                                    <li>
+                                                        如果<code>rejectPromise</code>以<code>r</code>为参数被调用，则以<code>r</code>
+                                                        为<code>reason</code>拒绝<code>promise</code>
+                                                    </li>
+                                                    <li>
+                                                        如果<code>resolvePromise</code>
+                                                        和<code>rejectPromise</code>都调用了，那么第一个调用
+                                                        优先，后面的调用忽略
+                                                    </li>
+                                                    <li>
+                                                        如果调用<code>then</code>抛出异常<code>e</code>：若<code>resolvePromise</code>
+                                                        或<code>rejectPromise</code>已经被调用，那么忽略，否则以<code>e</code>为
+                                                        <code>reason</code>拒绝<code>promise</code>
+                                                    </li>
 
-                    </section>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            如果<code>then</code>不是一个<code>function</code>，以<code>x</code>为<code>value</code>
+                                            执行<code>promise</code>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                如果<code>x</code>不是<code>object</code>或者<code>function</code>，以<code>x</code>
+                                为<code>value</code>执行<code>promise</code>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </section>
         </div>
@@ -233,6 +309,12 @@ promise.then(onFulfilled, onRejected);
 const ThenReturnPromise = $builtIn(`
 promise2 = promise1.then(onFulfilled, onRejected)
 `)
+
+const ResolvePromise = $builtIn(`
+resolvePromise(promise2, x, resolve, reject)
+`)
+
+
 </script>
 
 <style lang='scss'>
