@@ -12,6 +12,9 @@
 
         <!-- custom promise -->
         <PromiseRealization></PromiseRealization>
+
+        <!-- ------------- 3、Generator --------------- -->
+        <CustomGenerator></CustomGenerator>
     </div>
 
 </template>
@@ -21,6 +24,8 @@ import PromiseReference from "./tpl/promiseReference.vue"
 import PromiseStandard from "./tpl/promiseStandard.vue"
 import PromiseApplication from "./tpl/promise.vue"
 import PromiseRealization from "./tpl/promiseRealization.vue"
+import CustomGenerator from "./tpl/generator.vue"
+
 import { getCurrentInstance } from "vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;

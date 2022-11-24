@@ -121,6 +121,38 @@ const dataSource: Array<GlobalSidebar> = [
                         title: "测试"
                     }
                 ]
+            },
+            {
+                id: 104,
+                hashId: "Generator",
+                title: "Generator",
+                routeName: "JsBasic",
+                children: [
+                    {
+                        id: 1014,
+                        parentId: 104,
+                        hashId: "Iterator",
+                        title: "迭代器Iterator"
+                    },
+                    {
+                        id: 1015,
+                        parentId: 104,
+                        hashId: "CustomIterator",
+                        title: "自定义迭代器Iterator"
+                    },
+                    {
+                        id: 1016,
+                        parentId: 104,
+                        hashId: "SubGenerator",
+                        title: "生成器Generator"
+                    },
+                    {
+                        id: 1017,
+                        parentId: 104,
+                        hashId: "AutoGenerator",
+                        title: "Generator自动执行"
+                    }
+                ]
             }
         ]
     }

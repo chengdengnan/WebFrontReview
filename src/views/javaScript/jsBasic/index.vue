@@ -5,23 +5,30 @@
         <!-- ------------- This --------------- -->
         <CustomThis></CustomThis>
 
-        <!-- ------------- Promise --------------- -->
-        <CustomPromise></CustomPromise>
+        <!-- ------------- This Bind --------------- -->
+        <ThisBind></ThisBind>
 
-
-        <!-- ------------- 3、Generator --------------- -->
-        <CustomGenerator></CustomGenerator>
+        <!-- ------------- Action Scope --------------- -->
+        <ActionScope></ActionScope>
 
         <!-- ------------- DeepClone --------------- -->
-        <deepClone></deepClone>
+        <DeepClone></DeepClone>
+
+        <!-- Close Package -->
+        <ClosePackage></ClosePackage>
+
+        <!-- This Interview -->
+        <ThisInterview></ThisInterview>
     </div>
 </template>
 <script lang="ts" setup name="JsBasic">
 import { getCurrentInstance } from "vue"
 import CustomThis from "./tpl/this.vue"
-import CustomPromise from "./tpl/promise.vue"
-import CustomGenerator from "./tpl/generator.vue"
-import deepClone from "./tpl/deepClone.vue"
+import ThisBind from "./tpl/thisBind.vue";
+import ActionScope from "./tpl/actionScope.vue"
+import DeepClone from "./tpl/deepClone.vue"
+import ClosePackage from "./tpl/closePackage.vue"
+import ThisInterview from "./tpl/thisInterview.vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;
 

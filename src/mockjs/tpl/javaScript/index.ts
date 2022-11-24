@@ -64,95 +64,83 @@ const dataSource: Array<GlobalSidebar> = [
             },
             {
                 id: 1,
-                hashId: "Promise",
-                title: "Promise",
+                hashId: "ThisBind",
+                title: "this绑定",
                 routeName: "JsBasic",
                 children: [
                     {
                         id: 8,
                         parentId: 1,
-                        hashId: "Reference",
-                        title: "参考资料"
+                        hashId: "DefaultBind",
+                        title: "默认绑定(函数直接调用)"
                     },
                     {
                         id: 9,
                         parentId: 1,
-                        hashId: "ConstructorStatus",
-                        title: "构造函数和状态"
+                        hashId: "ImplicitBind",
+                        title: "隐式绑定"
                     },
                     {
                         id: 10,
                         parentId: 1,
-                        hashId: "NineMethods",
-                        title: "九大方法"
+                        hashId: "DisplayBind",
+                        title: "显示绑定(call/apply/bind)"
                     },
                     {
                         id: 11,
                         parentId: 1,
-                        hashId: "ErrorCapture",
-                        title: "错误捕获"
+                        hashId: "NewObject",
+                        title: "new创建对象"
                     },
                     {
                         id: 12,
                         parentId: 1,
-                        hashId: "ReturnValue",
-                        title: "返回值"
+                        hashId: "ArrowFunction",
+                        title: "箭头函数"
                     },
                     {
                         id: 13,
                         parentId: 1,
-                        hashId: "Async",
-                        title: "async"
-                    },
-                    {
-                        id: 14,
-                        parentId: 1,
-                        hashId: "Await",
-                        title: "await"
-                    },
-                    {
-                        id: 15,
-                        parentId: 1,
-                        hashId: "AsyncAwaitErrorCatch",
-                        title: "async和await错误处理"
-                    },
-                    {
-                        id: 16,
-                        parentId: 1,
-                        hashId: "AsyncAwaitLoop",
-                        title: "async和await循环中使用"
+                        hashId: "ThisPriority",
+                        title: "优先级"
                     }
                 ]
             },
             {
                 id: 2,
-                hashId: "Generator",
-                title: "Generator",
+                hashId: "ActionScope",
+                title: "作用域",
                 routeName: "JsBasic",
                 children: [
                     {
+                        id: 14,
+                        parentId: 2,
+                        hashId: "DataStorage",
+                        title: "数据存储"
+                    },
+                    {
+                        id: 15,
+                        parentId: 2,
+                        hashId: "ExcuteContext",
+                        title: "执行上下文"
+                    },
+                    {
+                        id: 16,
+                        parentId: 2,
+                        hashId: "ExcuteContextStack",
+                        title: "执行上下文栈"
+                    },
+                    {
                         id: 17,
                         parentId: 2,
-                        hashId: "Iterator",
-                        title: "迭代器Iterator"
+                        hashId: "ActionScopeChain",
+                        title: "作用域与作用域链"
                     },
                     {
                         id: 18,
                         parentId: 2,
-                        hashId: "CustomIterator",
-                        title: "自定义迭代器Iterator"
-                    },
-                    {
-                        id: 19,
-                        parentId: 2,
-                        hashId: "SubGenerator",
-                        title: "生成器Generator"
-                    },
-                    {
-                        id: 20,
-                        parentId: 2,
-                        hashId: "AutoGenerator",
-                        title: "Generator自动执行"
+                        hashId: "ActionScopeChainGrow",
+                        title: "作用域链增强"
                     }
                 ]
             },
@@ -162,6 +150,45 @@ const dataSource: Array<GlobalSidebar> = [
                 title: "深拷贝和浅拷贝",
                 routeName: "JsBasic",
                 children: []
+            },
+            {
+                id: 4,
+                hashId: "ClosePackage",
+                title: "闭包",
+                routeName: "JsBasic",
+                children: []
+            },
+            {
+                id: 5,
+                hashId: "Interview",
+                title: "面试",
+                routeName: "JsBasic",
+                children: [
+                    {
+                        id: 19,
+                        parentId: 5,
+                        hashId: "InterviewThis",
+                        title: "this指向"
+                    },
+                    {
+                        id: 20,
+                        parentId: 5,
+                        hashId: "InterviewActionScopeChain",
+                        title: "作用域链"
+                    },
+                    {
+                        id: 21,
+                        parentId: 5,
+                        hashId: "InterviewOrientObject",
+                        title: "面向对象"
+                    },
+                    {
+                        id: 22,
+                        parentId: 5,
+                        hashId: "InterviewIntergrated",
+                        title: "综合题"
+                    }
+                ]
             }
         ]
     }
