@@ -5,13 +5,41 @@
             <RouterLink to="#This" class="a-link">#</RouterLink>
             1、This指向
         </h3>
+        <div style="padding-top: 20px;margin-left: 10px;">
+            <p>
+                <a target="_blank" rel="help" href="http://liubin.org/promises-book/" class="a-navigation">参考资料:
+                    MDN中this解析</a>
+            </p>
+            <div class="lineH-p-40" style="margin-left: 30px;">
+                <p>
+                    1. 对于直接调用的函数来说，不管函数被放在了什么地方，<code>this</code>都是<code>window</code>;
+                </p>
+                <p>
+                    2. 对于被别人调用的函数来说，被谁【点】出来的，<code>this</code>就是谁;
+                </p>
+                <p>
+                    3. <code>call、apply</code>时，<code>this</code>是第一个参数。<code>bind</code>要优与
+                    <code>call/apply</code>，<code>call</code>参数多，<code>apply</code>参数少;
+                </p>
+                <p>
+                    4. 在构造函数中，类中(函数体中)出现的<code>this.xxx = xxx</code>中的<code>this</code>
+                    是当前类的一个实例;
+                </p>
+                <p>
+                    5. 箭头函数没有自己的<code>this</code>,需要看其外层是否有函数，如果有：外层函数的<code>this</code>
+                    就是内部箭头函数的<code>this</code>，如果没有，<code>this</code>则是<code>window</code>;
+                </p>
+            </div>
+        </div>
 
         <div>
             <h4 id="GlobalFunction">
                 <RouterLink to="#GlobalFunction" class="a-link">#</RouterLink>1、全局函数
             </h4>
             <section>
-                <p>this指向全局对象window，<span class="red">注意严格模式下</span>，this为undefined</p>
+                <p><code>this</code>指向全局对象<code>window</code>，<span class="red">注意严格模式下</span>，
+                    <code>this</code>为<code>undefined</code>;
+                </p>
                 <WebPrismEditor v-model="GlobalFunction" />
             </section>
         </div>

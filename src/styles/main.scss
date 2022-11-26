@@ -6,7 +6,7 @@ $border-color: var(--color-success);
     min-width: calc(100% - 20rem);
     padding: 0 1.7rem;
     padding-bottom: 5rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
     // 代码块
     .prism-editor {
         width: calc(100% - 10rem);
@@ -103,6 +103,13 @@ $border-color: var(--color-success);
         text-indent: 32px;
     }
 
+    // 行高 40px
+    .lineH-p-40 {
+        line-height: 40px;
+        p {
+            line-height: 40px;
+        }
+    }
     // 二级内容块
     section:not(.custom) {
         font-size: 0.9rem;
