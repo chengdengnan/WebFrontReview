@@ -59,7 +59,8 @@ $border-color: var(--color-success);
     h2,
     h3,
     h4,
-    .c-h5 {
+    .c-h5,
+    .c-h6 {
         .a-link {
             opacity: 0;
             float: left;
@@ -96,6 +97,9 @@ $border-color: var(--color-success);
         color: $border-color;
         margin-left: 10px;
         padding-bottom: 8px;
+    }
+    .a-navigation:hover {
+        cursor: pointer;
     }
 
     // 首字符缩进

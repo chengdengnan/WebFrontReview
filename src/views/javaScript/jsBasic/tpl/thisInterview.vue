@@ -19,6 +19,21 @@
         </h4>
     </div>
     <div>
+        <h4 id="CustomCall">
+            <RouterLink to="#CustomCall" class="a-link">#</RouterLink>4、call 函数的实现步骤
+        </h4>
+    </div>
+    <div>
+        <h4 id="CustomApply">
+            <RouterLink to="#CustomApply" class="a-link">#</RouterLink>5、apply 函数的实现步骤
+        </h4>
+    </div>
+    <div>
+        <h4 id="CustomBind">
+            <RouterLink to="#CustomBind" class="a-link">#</RouterLink>6、bind 函数的实现步骤
+        </h4>
+    </div>
+    <div>
         <h4 id="InterviewIntergrated">
             <RouterLink to="#InterviewIntergrated" class="a-link">#</RouterLink>4、综合题
         </h4>

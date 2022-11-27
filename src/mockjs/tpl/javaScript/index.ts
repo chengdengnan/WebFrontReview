@@ -95,7 +95,7 @@ const dataSource: Array<GlobalSidebar> = [
                     {
                         id: 12,
                         parentId: 1,
-                        hashId: "ArrowFunction",
+                        hashId: "ThisBindArrowFunction",
                         title: "箭头函数"
                     },
                     {
@@ -182,8 +182,27 @@ const dataSource: Array<GlobalSidebar> = [
                         hashId: "InterviewOrientObject",
                         title: "面向对象"
                     },
+
                     {
                         id: 22,
+                        parentId: 5,
+                        hashId: "CustomCall",
+                        title: "实现 call"
+                    },
+                    {
+                        id: 23,
+                        parentId: 5,
+                        hashId: "CustomApply",
+                        title: "实现 apply"
+                    },
+                    {
+                        id: 24,
+                        parentId: 5,
+                        hashId: "CustomBind",
+                        title: "实现 bind"
+                    },
+                    {
+                        id: 25,
                         parentId: 5,
                         hashId: "InterviewIntergrated",
                         title: "综合题"
