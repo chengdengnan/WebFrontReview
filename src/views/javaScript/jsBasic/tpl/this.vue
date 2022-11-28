@@ -7,8 +7,7 @@
         </h3>
         <div style="padding-top: 20px;margin-left: 10px;">
             <p>
-                <a target="_blank" rel="help" href="http://liubin.org/promises-book/" class="a-navigation">参考资料:
-                    MDN中this解析</a>
+                <NavigationBlank v-model="MDNThisLink">参考资料: MDN中this解析</NavigationBlank>
             </p>
             <div class="lineH-p-40" style="margin-left: 30px;">
                 <p>
@@ -133,9 +132,11 @@
 </template>
 
 <script lang='ts' setup >
-import { getCurrentInstance } from "vue"
+import { ref, getCurrentInstance } from "vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;
+
+const MDNThisLink = ref<string>('http://liubin.org/promises-book/');
 
 const GlobalFunction = $builtIn(
     `

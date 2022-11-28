@@ -421,19 +421,13 @@
       <div>
         <ul type="square">
           <li>
-            <a target="_blank" class="a-navigation" href="https://juejin.cn/post/6844903457170653198">深入理解 ES7 的
-              async/await
-            </a>
+            <NavigationBlank v-model="DeepAsyncLink">深入理解 ES7 的async/await</NavigationBlank>
           </li>
           <li>
-            <a target="_blank" class="a-navigation" href="https://juejin.cn/post/6844903767129718791">async/await
-              优雅的错误处理方法
-            </a>
+            <NavigationBlank v-model="AsyncErrorLink">async/await优雅的错误处理方法</NavigationBlank>
           </li>
           <li>
-            <a target="_blank" class="a-navigation" href="https://juejin.cn/post/6844903860079738887">如何在 JS 循环中正确使用
-              async 与 await
-            </a>
+            <NavigationBlank v-model="AsyncLoopLink">如何在 JS 循环中正确使用async 与 await</NavigationBlank>
           </li>
         </ul>
       </div>
@@ -620,9 +614,8 @@
       <RouterLink to="#AsyncAwaitLoop" class="a-link">#</RouterLink>9、async和await循环中使用
     </h4>
     <section>
-      <p>参考资料: <a target="_blank" rel="help" href="https://juejin.cn/post/6844903860079738887" class="a-navigation">如何在
-          JS
-          循环中正确使用 async 与 await</a>
+      <p>参考资料: 
+        <NavigationBlank v-model="AsyncLoopLink">如何在JS循环中正确使用 async 与 await</NavigationBlank>
       </p>
       <div>
         <ul>
@@ -638,9 +631,13 @@
 </template>
 
 <script lang='ts' setup >
-import { getCurrentInstance } from "vue"
+import { ref, getCurrentInstance } from "vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;
+
+const DeepAsyncLink = ref<string>('https://juejin.cn/post/6844903457170653198');
+const AsyncErrorLink = ref<string>('https://juejin.cn/post/6844903767129718791');
+const AsyncLoopLink = ref<string>('https://juejin.cn/post/6844903860079738887');
 
 
 

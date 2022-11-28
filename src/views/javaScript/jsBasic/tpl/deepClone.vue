@@ -10,14 +10,11 @@
                 <div>
                     参考资料：
                     <div class="indent">
-                        <a target="_blank" rel="help"
-                            href="https://blog.csdn.net/weixin_56650035/article/details/123973205"
-                            class="a-navigation">1. JS
-                            你最少用几行代码实现深拷贝？</a>
+                        <NavigationBlank v-model="DeepCloneLink">1. JS
+                            你最少用几行代码实现深拷贝？</NavigationBlank>
                     </div>
                     <div class="indent">
-                        <a target="_blank" rel="help" href="https://github.com/lodash/lodash/blob/master/cloneDeep.js"
-                            class="a-navigation">2. Lodash源码</a>
+                        <NavigationBlank v-model="LodashLink">2. Lodash源码</NavigationBlank>
                     </div>
                 </div>
             </section>
@@ -26,6 +23,11 @@
 </template>
 
 <script lang='ts' setup >
+import { ref } from "vue"
+
+const DeepCloneLink = ref<string>('https://blog.csdn.net/weixin_56650035/article/details/123973205');
+const LodashLink = ref<string>('https://github.com/lodash/lodash/blob/master/cloneDeep.js');
+
 </script>
 
 <style lang='scss'>
