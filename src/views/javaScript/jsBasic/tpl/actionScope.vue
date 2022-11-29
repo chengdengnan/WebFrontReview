@@ -104,12 +104,30 @@
                     </li>
                 </ul>
             </div>
+            <WebPrismEditor v-model="ScopeAndScopeChain"></WebPrismEditor>
         </section>
     </div>
     <div>
         <h4 id="ActionScopeChainGrow">
             <RouterLink to="#ActionScopeChainGrow" class="a-link">#</RouterLink>5、作用域链增强
         </h4>
+        <section>
+            <p>某些语句会导致在作用域链前端临时添加一个上下文，这个上下文在代码执行后会被删除。</p>
+            <div>
+                <ul>
+                    <li>
+                        <span class="red">try/catch语句中的catch块：</span>
+                        会创建一个新的变量对象，包含要抛出的错误对象的声明
+                    </li>
+                    <li>
+                        <span class="red">with语句：</span>
+                        向作用域链前端添加制定的对象
+                    </li>
+                </ul>
+            </div>
+            <WebPrismEditor v-model="ScopeChainEnhance"></WebPrismEditor>
+
+        </section>
     </div>
 </template>
 
@@ -185,7 +203,63 @@ function a() {
 a();
 `)
 
+const ScopeAndScopeChain = $builtIn(`
+function a() {
+  return function b() {
+    var name = "Barry";
+    console.log(name); // Barry
+  };
+}
 
+function c() {
+  var name = "Fashion Barry";
+  b(); // 访问全局作用域找到 b()
+}
+
+var b = a(); // 全局作用域
+c();
+
+// 去掉函数b中的 name 声明后
+function a2() {
+  return function b2() {
+    // var name = "Barry";
+    console.log(name); // name is not defined
+  };
+}
+
+function c2() {
+  var name = "Fashion Barry";
+  b2(); // 访问全局作用域找到 b()
+}
+
+var b2 = a2(); // 全局作用域
+c2();
+`)
+
+const ScopeChainEnhance = $builtIn(`
+// 示例 1
+var a = 10,
+  b = 10;
+with ({ a: 10 }) {
+  var a = 20,
+    b = 20;
+  console.log(a); // 20
+  console.log(b); // 20
+}
+console.log(a); // 10 原值
+console.log(b); // 20 b被更改
+
+// 示例2
+var a = 15,
+  b = 15;
+with ({ a: 10 }) {
+  b = 30;
+  console.log(a); // 10，指定对象a的值
+  console.log(b); // 30
+}
+console.log(a); // 15
+console.log(b); // 30
+`)
 </script>
 
 <style lang='scss'>

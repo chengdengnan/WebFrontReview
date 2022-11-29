@@ -156,7 +156,20 @@ const dataSource: Array<GlobalSidebar> = [
                 hashId: "ClosePackage",
                 title: "闭包",
                 routeName: "JsBasic",
-                children: []
+                children: [
+                    {
+                        id: 26,
+                        parentId: 4,
+                        hashId: "PrivateVariable",
+                        title: "封装私有变量"
+                    },
+                    {
+                        id: 27,
+                        parentId: 4,
+                        hashId: "StorageVariable",
+                        title: "存储变量"
+                    }
+                ]
             },
             {
                 id: 5,

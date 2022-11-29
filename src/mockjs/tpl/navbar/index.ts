@@ -193,7 +193,7 @@ const dataSource: Array<Navbar> = [
                 parentId: 12,
                 title: "react基础",
                 routeName: "ReactBasic",
-                disabled: true
+                disabled: false
             },
             {
                 id: 34,

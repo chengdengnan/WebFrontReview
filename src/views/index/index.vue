@@ -113,12 +113,12 @@ onMounted(() => {
 
         .main-container {
             position: absolute;
-            top: 20%;
+            top: 30%;
             left: 49%;
             transform: translate(-49%, -20%);
             text-align: center;
             padding: 7px 10px;
-            box-shadow: 0 0 10px 6px rgba(0, 0, 0, .5);
+            box-shadow: 0 0 10px 6px rgba(0, 0, 0, .3);
 
             &-name {
                 color: #fff;
@@ -162,7 +162,7 @@ onMounted(() => {
         left: 0;
         right: 0;
         bottom: 0;
-        background: transparent url("../../assets/index_background_image.jpg") no-repeat;
+        background: transparent url("../../assets/background-image2.jpg") no-repeat;
         background-size: cover;
         filter: blur(1px);
         z-index: -1;
