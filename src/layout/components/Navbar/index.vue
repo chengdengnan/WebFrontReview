@@ -5,7 +5,7 @@
                 <el-avatar :size="44" shape="circle" :src="src" fit="cover"></el-avatar>
             </el-badge>
             <span class="header-title main-title hidden-xs-only">
-                <span class="hidden-xs-only">Barry's</span>&nbsp;
+                <span class="hidden-md-and-down">Barry's</span>&nbsp;
                 <span class="hidden-md-and-down">blog</span>
             </span>
         </section>
@@ -19,6 +19,7 @@
                 </template>
             </el-input>
         </section>
+        <div style=""></div>
         <section class="navbar-dropDown">
             <DropDown></DropDown>
         </section>
@@ -46,7 +47,7 @@ const redirectIndex = () => {
     position: relative;
     background-color: #fff;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 2px;
     border-bottom: 1px solid #eaecef;
     display: flex;
     flex-direction: row;
@@ -55,11 +56,10 @@ const redirectIndex = () => {
     flex-wrap: nowrap;
 
     &-avatar {
-        flex-grow: 4;
+        flex-grow: 5;
         float: right;
         margin: 0 auto;
         padding-left: 1%;
-
         .header-title {
             margin-left: 1.5rem;
         }
@@ -72,13 +72,11 @@ const redirectIndex = () => {
     &-search {
         display: flex;
         justify-content: flex-end;
-        flex-grow: 4;
-
-        // margin-left: 9%;
+        flex-grow: 5;
     }
 
     &-dropDown {
-        flex-grow: 5;
+        flex-grow: 2;
         // width: 50%;
     }
 }

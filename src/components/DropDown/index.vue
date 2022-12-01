@@ -1,6 +1,6 @@
 <template>
     <section class="drop-down" v-loading="loading">
-        <el-dropdown v-for="item in navbar" :key="item.id" @command="handleCommand($event,)" class="font">
+        <!-- <el-dropdown v-for="item in navbar" :key="item.id" @command="handleCommand($event,)" class="font">
             <span class="sub-title">
                 {{ item.title }}
                 <el-icon :size="12" class="el-icon--right">
@@ -15,26 +15,53 @@
                     </el-dropdown-item>
                 </el-dropdown-menu>
             </template>
-        </el-dropdown>
+        </el-dropdown> -->
+
+        <el-menu :default-active="defaultActive" mode="horizontal" @select="handleSelect" :ellipsis="true"
+            background-color="#FFFFFF" text-color="#303133" :active-text-color="activeTextColor" :unique-opened="true"
+            :router="false">
+            <template v-for="item in navbar" :key="item.id">
+                <el-sub-menu :index="item.hashId">
+                    <template #title>{{ item.title }}</template>
+                    <el-menu-item v-for="subItem in item.children" :key="subItem.id" :index="subItem.routeName"
+                        :disabled="subItem.disabled" @click="handleClick(subItem)">
+                        {{ subItem.title }}
+                    </el-menu-item>
+                </el-sub-menu>
+            </template>
+        </el-menu>
     </section>
 </template>
 <script lang="ts" setup>
 import { info } from '@/api/navbar';
 import { Pointer } from '@element-plus/icons-vue'
-import { useRouter } from "vue-router";
-import { onBeforeMount, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { onBeforeMount, ref, toRaw, nextTick, getCurrentInstance } from "vue";
 import { ElMessage } from 'element-plus'
+const currentInstance = getCurrentInstance();
+const { $getRootColor } = currentInstance?.appContext.config.globalProperties as any
 const router = useRouter();
+const route = useRoute();
 let loading = ref<boolean>(false);
 let navbar = ref<any>([]);
+let defaultActive = ref<string>(route.name as string);
+let activeTextColor = ref<string>($getRootColor())
+const handleSelect = (index: string, indexPath: string, item: any): void => {
+    nextTick(() => {
+        defaultActive.value = index
+    })
+}
 
 const handleClick = (subItem: any): void => {
-    if (subItem.disabled) ElMessage.warning("功能尚未开放,敬请期待！")
+    const item = toRaw(subItem);
+    if (item.disabled) ElMessage.warning("功能尚未开放,敬请期待！")
+    router.push({ name: item.routeName })
+
 }
 
-const handleCommand = (command: string) => {
-    router.push({ name: command })
-}
+// const handleCommand = (command: string) => {
+//     router.push({ name: command })
+// }
 
 const _fetch = async (): Promise<void> => {
     if (!sessionStorage.getItem('Navbar')) {
@@ -54,6 +81,7 @@ const _fetch = async (): Promise<void> => {
 
 onBeforeMount(() => {
     _fetch()
+
 })
 </script>
 
@@ -61,11 +89,9 @@ onBeforeMount(() => {
 .drop-down {
     width: 100%;
     position: relative;
-    white-space: nowrap;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    overflow: hidden;
+
+    .el-menu--horizontal {
+        border-bottom: none;
+    }
 }
 </style>

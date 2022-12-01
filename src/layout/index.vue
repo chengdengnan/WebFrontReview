@@ -10,6 +10,7 @@
                         <sidebar />
                     </el-aside>
                 </Transition>
+                <div class="mouse-move" ref="mouseMove"></div>
                 <div class="sidebar-collapse" :style="{ left: showSideber ? sidebarWidth : '0px' }">
                     <el-icon class="sidebar-collapse-icon" @click="handleCollapse" size="18px"
                         color="rgba(0, 0, 0, 0.3)">
@@ -17,7 +18,6 @@
                         <DArrowRight v-show="!showSideber" />
                     </el-icon>
                 </div>
-                <div class="mouse-move" ref="mouseMove"></div>
                 <el-main class="el-main">
                     <app-main />
                 </el-main>
@@ -84,6 +84,7 @@ onMounted(() => {
         }
 
         .sidebar-collapse {
+            display: block;
             position: fixed;
             top: 50%;
             z-index: 100;
@@ -92,6 +93,7 @@ onMounted(() => {
 
             .sidebar-collapse-icon:hover {
                 transform: scale(1.2);
+                color: var(--color-default);
             }
 
             &:hover {
@@ -103,10 +105,21 @@ onMounted(() => {
         .mouse-move {
             height: calc(100vh - 72px);
             width: 5px;
+            border-radius: 10px;
             background-color: transparent;
             opacity: 0;
             z-index: 99;
-            cursor: e-resize;
+            cursor: col-resize;
+        }
+
+        .mouse-move:hover {
+            opacity: .8;
+            background-color: var(--color-default);
+            transition: opacity .6s linear;
+        }
+
+        .mouse-move:hover+.sidebar-collapse {
+            display: none !important;
         }
 
     }

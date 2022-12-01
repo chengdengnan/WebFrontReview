@@ -7,77 +7,77 @@ const dataSource: Array<Navbar> = [
         hashId: "Js",
         children: [
             {
-                id: 11,
+                id: 111,
                 parentId: 10,
                 title: "js杂记",
                 routeName: "JsBasic",
                 disabled: false
             },
             {
-                id: 12,
+                id: 112,
                 parentId: 10,
                 title: "面向对象",
                 routeName: "OrientObject",
                 disabled: true
             },
             {
-                id: 12,
+                id: 113,
                 parentId: 10,
                 title: "Promise规范及其应用",
                 routeName: "PromiseApplication",
                 disabled: false
             },
             {
-                id: 14,
+                id: 114,
                 parentId: 10,
                 title: "浏览器对象详解",
                 routeName: "BrowserDetail",
                 disabled: true
             },
             {
-                id: 15,
+                id: 115,
                 parentId: 10,
                 title: "ES进阶",
                 routeName: "EsAdvance",
                 disabled: true
             },
             {
-                id: 16,
+                id: 116,
                 parentId: 10,
                 title: "JavaScript性能优化",
                 routeName: "JavaScriptPerformance",
                 disabled: true
             },
             {
-                id: 17,
+                id: 117,
                 parentId: 10,
                 title: "函数式编程",
                 routeName: "FunctionProgram",
                 disabled: true
             },
             {
-                id: 18,
+                id: 118,
                 parentId: 10,
                 title: "设计模式",
                 routeName: "DesignMode",
                 disabled: true
             },
             {
-                id: 19,
+                id: 119,
                 parentId: 10,
                 title: "TS初探",
                 routeName: "TsFirst",
                 disabled: true
             },
             {
-                id: 20,
+                id: 120,
                 parentId: 10,
                 title: "TS初探",
                 routeName: "TsBasic",
                 disabled: true
             },
             {
-                id: 21,
+                id: 121,
                 parentId: 10,
                 title: "TS工程",
                 routeName: "TsProject",
@@ -91,91 +91,91 @@ const dataSource: Array<Navbar> = [
         hashId: "Vue",
         children: [
             {
-                id: 22,
+                id: 122,
                 parentId: 11,
                 title: "vue2.0基础",
                 routeName: "Vue2Basic",
                 disabled: true
             },
             {
-                id: 23,
+                id: 123,
                 parentId: 11,
                 title: "vue2.0进阶",
                 routeName: "Vue2Advance",
                 disabled: true
             },
             {
-                id: 24,
+                id: 124,
                 parentId: 11,
                 title: "vuex",
                 routeName: "Vuex",
                 disabled: true
             },
             {
-                id: 25,
+                id: 125,
                 parentId: 11,
                 title: "vue-cli",
                 routeName: "VueCli",
                 disabled: true
             },
             {
-                id: 26,
+                id: 126,
                 parentId: 11,
                 title: "vue-router",
                 routeName: "VueRouter",
                 disabled: true
             },
             {
-                id: 27,
+                id: 127,
                 parentId: 11,
                 title: "vue-loader",
                 routeName: "VueLoader",
                 disabled: true
             },
             {
-                id: 28,
+                id: 128,
                 parentId: 11,
                 title: "vue-ssr",
                 routeName: "VueSsr",
                 disabled: true
             },
             {
-                id: 29,
+                id: 129,
                 parentId: 11,
                 title: "vue-i18n",
                 routeName: "VueI18n",
                 disabled: true
             },
             {
-                id: 30,
+                id: 130,
                 parentId: 11,
                 title: "生命周期",
                 routeName: "LifeCycle",
                 disabled: true
             },
             {
-                id: 31,
+                id: 131,
                 parentId: 11,
                 title: "响应式原理",
                 routeName: "DefinepropertyTheory",
                 disabled: true
             },
             {
-                id: 32,
+                id: 132,
                 parentId: 11,
                 title: "diff原理",
                 routeName: "DiffTheory",
                 disabled: true
             },
             {
-                id: 33,
+                id: 133,
                 parentId: 11,
                 title: "编译原理",
                 routeName: "CompileTheory",
                 disabled: true
             },
             {
-                id: 34,
+                id: 134,
                 parentId: 11,
                 title: "实战总结",
                 routeName: "VueProject",
@@ -189,70 +189,70 @@ const dataSource: Array<Navbar> = [
         hashId: "React",
         children: [
             {
-                id: 33,
+                id: 133,
                 parentId: 12,
                 title: "react基础",
                 routeName: "ReactBasic",
                 disabled: false
             },
             {
-                id: 34,
+                id: 134,
                 parentId: 12,
                 title: "react进阶",
                 routeName: "ReactAdvance",
                 disabled: true
             },
             {
-                id: 35,
+                id: 135,
                 parentId: 12,
                 title: "react-router",
                 routeName: "ReactRouter",
                 disabled: true
             },
             {
-                id: 36,
+                id: 136,
                 parentId: 12,
                 title: "react状态管理",
                 routeName: "ReactStatusManage",
                 disabled: true
             },
             {
-                id: 37,
+                id: 137,
                 parentId: 12,
                 title: "react状态同构",
                 routeName: "ReactIsomorphism", // Isomorphism ：同构
                 disabled: true
             },
             {
-                id: 38,
+                id: 138,
                 parentId: 12,
                 title: "react组件封装",
                 routeName: "ReactComponent",
                 disabled: true
             },
             {
-                id: 39,
+                id: 139,
                 parentId: 12,
                 title: "react源码分析",
                 routeName: "ReactSourceCode",
                 disabled: true
             },
             {
-                id: 40,
+                id: 140,
                 parentId: 12,
                 title: "redux & mobox",
                 routeName: "ReduxMobox",
                 disabled: true
             },
             {
-                id: 41,
+                id: 141,
                 parentId: 12,
                 title: "react-ts实战",
                 routeName: "ReactTs",
                 disabled: true
             },
             {
-                id: 42,
+                id: 142,
                 parentId: 12,
                 title: "react问题整理",
                 routeName: "ReactProblem",
@@ -261,75 +261,75 @@ const dataSource: Array<Navbar> = [
         ]
     },
     {
-        id: 13, // children 52
+        id: 13, 
         title: "工程化",
         hashId: "Engineer",
         children: [
             {
-                id: 43,
+                id: 143,
                 parentId: 13,
                 title: "模块化规范",
                 routeName: "ModulesStandard",
                 disabled: true
             },
             {
-                id: 44,
+                id: 144,
                 parentId: 13,
                 title: "前端工程化详解",
                 routeName: "WebEngineerDetail",
                 disabled: true
             },
             {
-                id: 45,
+                id: 145,
                 parentId: 13,
                 title: "模块化开发与Webpack",
                 routeName: "ModulesWebpack",
                 disabled: true
             },
             {
-                id: 46,
+                id: 146,
                 parentId: 13,
                 title: "babel详解",
                 routeName: "BabelDetail",
                 disabled: true
             },
             {
-                id: 47,
+                id: 147,
                 parentId: 13,
                 title: "自动化构建",
                 routeName: "AutomationStructure", // Structure:结构、构造
                 disabled: true
             },
             {
-                id: 48,
+                id: 148,
                 parentId: 13,
                 title: "自动化测试",
                 routeName: "AutomationTest",
                 disabled: true
             },
             {
-                id: 49,
+                id: 149,
                 parentId: 13,
                 title: "自动化部署",
                 routeName: "AutomationDeploy",
                 disabled: true
             },
             {
-                id: 50,
+                id: 150,
                 parentId: 13,
                 title: "前端AST",
                 routeName: "WebAST",
                 disabled: true
             },
             {
-                id: 51,
+                id: 151,
                 parentId: 13,
                 title: "微前端",
                 routeName: "TinyWeb",
                 disabled: true
             },
             {
-                id: 52,
+                id: 152,
                 parentId: 13,
                 title: "工程化方案",
                 routeName: "EngineerScheme",
@@ -343,42 +343,42 @@ const dataSource: Array<Navbar> = [
         hashId: "Nodejs",
         children: [
             {
-                id: 53,
+                id: 153,
                 parentId: 14,
                 title: "nodejs基础",
                 routeName: "NodejsBasic",
                 disabled: true
             },
             {
-                id: 54,
+                id: 154,
                 parentId: 14,
                 title: "nodejs基本原理", // EventLoop / Buffer / Stream / Global
                 routeName: "NodejsTheory",
                 disabled: true
             },
             {
-                id: 55,
+                id: 155,
                 parentId: 14,
                 title: "nodejs常用框架",
                 routeName: "NodejsFrame",
                 disabled: true
             },
             {
-                id: 56,
+                id: 156,
                 parentId: 14,
                 title: "nodejs网络及部署",
                 routeName: "NodejsNetwork",
                 disabled: true
             },
             {
-                id: 57,
+                id: 157,
                 parentId: 14,
                 title: "nodejs缓存、安全及协议",
                 routeName: "NodejsCache",
                 disabled: true
             },
             {
-                id: 58,
+                id: 158,
                 parentId: 14,
                 title: "nodejs实战",
                 routeName: "NodejsProject",
@@ -392,42 +392,42 @@ const dataSource: Array<Navbar> = [
         hashId: "CrossTerminal",
         children: [
             {
-                id: 59,
+                id: 159,
                 parentId: 15,
                 title: "uniapp",
                 routeName: "Uniapp",
                 disabled: true
             },
             {
-                id: 60,
+                id: 160,
                 parentId: 15,
                 title: "reactNative",
                 routeName: "ReactNative",
                 disabled: true
             },
             {
-                id: 61,
+                id: 161,
                 parentId: 15,
                 title: "hybrid",
                 routeName: "Hybrid",
                 disabled: true
             },
             {
-                id: 62,
+                id: 162,
                 parentId: 15,
                 title: "electron",
                 routeName: "Electron",
                 disabled: true
             },
             {
-                id: 63,
+                id: 163,
                 parentId: 15,
                 title: "flutter",
                 routeName: "Flutter",
                 disabled: true
             },
             {
-                id: 64,
+                id: 164,
                 parentId: 15,
                 title: "QT",
                 routeName: "QT",
@@ -441,70 +441,70 @@ const dataSource: Array<Navbar> = [
         hashId: "Algorithm",
         children: [
             {
-                id: 65,
+                id: 165,
                 parentId: 16,
                 title: "基础数据结构",
                 routeName: "BasicDataStructure",
                 disabled: true
             },
             {
-                id: 66,
+                id: 166,
                 parentId: 16,
                 title: "图的存储和遍历",
                 routeName: "ChartStorage",
                 disabled: true
             },
             {
-                id: 67,
+                id: 167,
                 parentId: 16,
                 title: "双指针",
                 routeName: "DoublePointer",
                 disabled: true
             },
             {
-                id: 68,
+                id: 168,
                 parentId: 16,
                 title: "最短编辑距离",
                 routeName: "Minimum",
                 disabled: true
             },
             {
-                id: 69,
+                id: 169,
                 parentId: 16,
                 title: "贪心算法",
                 routeName: "Greed",
                 disabled: true
             },
             {
-                id: 70,
+                id: 170,
                 parentId: 16,
                 title: "动态规划",
                 routeName: "Planning",
                 disabled: true
             },
             {
-                id: 71,
+                id: 171,
                 parentId: 16,
                 title: "LeetCode",
                 routeName: "LeetCode",
                 disabled: true
             },
             {
-                id: 72,
+                id: 172,
                 parentId: 16,
                 title: "BAT高频算法",
                 routeName: "BAT",
                 disabled: true
             },
             {
-                id: 73,
+                id: 173,
                 parentId: 16,
                 title: "树遍历 & 图遍历",
                 routeName: "TreeErgodic",
                 disabled: true
             },
             {
-                id: 74,
+                id: 174,
                 parentId: 16,
                 title: "DFS & BFS",
                 routeName: "DFSBFS",
@@ -513,69 +513,69 @@ const dataSource: Array<Navbar> = [
         ]
     },
     {
-        id: 16, // children 83
+        id: 17, // children 83
         title: "其他",
         hashId: "Other",
         children: [
             {
-                id: 75,
-                parentId: 16,
+                id: 175,
+                parentId: 17,
                 title: "前端面试",
                 routeName: "Offer",
                 disabled: true
             },
             {
-                id: 76,
-                parentId: 16,
+                id: 176,
+                parentId: 17,
                 title: "前端性能优化",
                 routeName: "WebPerformance",
                 disabled: true
             },
             {
-                id: 77,
-                parentId: 16,
+                id: 177,
+                parentId: 17,
                 title: "浏览器进程和线程",
                 routeName: "BrowserProcess",
                 disabled: true
             },
             {
-                id: 78,
-                parentId: 16,
+                id: 178,
+                parentId: 17,
                 title: "前端网络安全",
                 routeName: "NetworkSecurity",
                 disabled: true
             },
             {
-                id: 79,
-                parentId: 16,
+                id: 179,
+                parentId: 17,
                 title: "低代码平台",
                 routeName: "LowCode",
                 disabled: true
             },
             {
-                id: 80,
-                parentId: 16,
+                id: 180,
+                parentId: 17,
                 title: "小程序",
                 routeName: "WeChat",
                 disabled: true
             },
             {
-                id: 81,
-                parentId: 16,
+                id: 181,
+                parentId: 17,
                 title: "css",
                 routeName: "Css",
                 disabled: true
             },
             {
-                id: 82,
-                parentId: 16,
+                id: 182,
+                parentId: 17,
                 title: "canvas",
                 routeName: "Canvas",
                 disabled: true
             },
             {
-                id: 83,
-                parentId: 16,
+                id: 183,
+                parentId: 17,
                 title: "前端设计模式",
                 routeName: "DesignMode",
                 disabled: true

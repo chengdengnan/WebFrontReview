@@ -37,7 +37,7 @@ watch(() => props.modelValue, (newVal, oldVal) => {
 </script>
 
 <style lang='scss'>
-$color: var(--color-success);
+$color: var(--color-default);
 
 .navigation-blank {
     font-size: 0.9em;

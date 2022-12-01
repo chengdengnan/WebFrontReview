@@ -1,13 +1,11 @@
-import { GlobalSidebar, Sidebar, getCurrentTreeNode } from "../../sidebar.type";
+import {
+    GlobalSidebar,
+    Sidebar,
+    InfoSidebar,
+    getCurrentTreeNode
+} from "../../sidebar.type";
 
 // js 杂记
-namespace InfoSidebar {
-    export type InfoSidebarParams = {
-        body: string;
-        type: string;
-        url: string;
-    };
-}
 const dataSource: Array<GlobalSidebar> = [
     {
         mainTitle: "JavaScript基础问题梳理",

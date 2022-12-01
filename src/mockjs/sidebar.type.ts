@@ -1,9 +1,18 @@
 /**
+ * 侧边栏通用类型
  * @param { number } id Unique value -> start :0
  * @param { string } hashId href Unique value
  * @param { string } title show current title
  * @param { string } routeName page find data
  */
+
+namespace InfoSidebar {
+    export type InfoSidebarParams = {
+        body: string;
+        type: string;
+        url: string;
+    };
+}
 
 interface GlobalSidebar {
     mainTitle: string;
@@ -25,6 +34,7 @@ interface SidebarItem {
     title: string;
 }
 
+// 通用查询根据子节点查出父节点
 const getCurrentTreeNode = (hashId: string, data: any) => {
     if (!hashId || !data) throw new Error("Params can not empty!");
     const result: any = {
@@ -56,4 +66,4 @@ const getCurrentTreeNode = (hashId: string, data: any) => {
     return result;
 };
 
-export { GlobalSidebar, Sidebar, SidebarItem, getCurrentTreeNode };
+export { GlobalSidebar, Sidebar, SidebarItem, InfoSidebar, getCurrentTreeNode };

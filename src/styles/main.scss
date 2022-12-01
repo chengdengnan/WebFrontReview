@@ -1,5 +1,5 @@
 // 20: sidebar 18 + padding 2
-$border-color: var(--color-success);
+$border-color: var(--color-default);
 .main {
     max-width: 100%;
     width: calc(100% - 5rem);
@@ -66,7 +66,7 @@ $border-color: var(--color-success);
             float: left;
             font-size: 0.85em;
             text-align: center;
-            color: var(--color-success);
+            color: var(--color-default);
             margin-left: -0.87em;
             padding-right: 0.23em;
             margin-top: 0.125em;

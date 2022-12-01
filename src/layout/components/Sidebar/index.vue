@@ -146,8 +146,8 @@ onBeforeMount(() => {
 
                 a.sidebar-link.active {
                     font-weight: 600;
-                    color: var(--color-success);
-                    border-left-color: var(--color-success);
+                    color: var(--color-default);
+                    border-left-color: var(--color-default);
                 }
 
                 a.sidebar-link {

@@ -1,11 +1,13 @@
 import Mock from "mockjs";
+// js basic
 import jsBasicInfo from "./tpl/javaScript/index";
 import promiseApplicationInfo from "./tpl/javaScript/promiseApplication";
-
+// react
+import reactBasicInfo from "./tpl/react/basic";
 import navbar from "./tpl/navbar";
 const requestMethod = "post";
 const BASE_URL = process.env.VUE_APP_BASE_API + "/";
-const mocks = [jsBasicInfo, promiseApplicationInfo];
+const mocks = [jsBasicInfo, promiseApplicationInfo, reactBasicInfo];
 
 /**
  * mock API
