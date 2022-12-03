@@ -5,10 +5,16 @@
             <RouterLink to="#This" class="a-link">#</RouterLink>
             1、This指向
         </h3>
-        <div style="padding-top: 20px;margin-left: 10px;">
-            <p>
+
+        <div style="margin-left: 5px;">
+            <div class="overview">
+                <NavigationBlank v-model="MDNThisLink">
+                    参考资料: MDN中this解析
+                </NavigationBlank>
+            </div>
+            <!-- <p>
                 <NavigationBlank v-model="MDNThisLink">参考资料: MDN中this解析</NavigationBlank>
-            </p>
+            </p> -->
             <div class="lineH-p-40" style="margin-left: 30px;">
                 <p>
                     1. 对于直接调用的函数来说，不管函数被放在了什么地方，<code>this</code>都是<code>window</code>;

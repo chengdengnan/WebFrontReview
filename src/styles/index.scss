@@ -9,106 +9,113 @@
 // global style
 
 * {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 html {
-  height: 100%;
-  font-size: 1rem;
-  box-sizing: border-box;
+    height: 100%;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
 body {
-  height: 100%;
-  text-rendering: optimizeLegibility;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    height: 100%;
+    text-rendering: optimizeLegibility;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 #app {
-  height: 100%;
+    height: 100%;
 }
 
 // 一级标题
 .main-title {
-  color: var(--main-title-default, #2c3e50);
-  font-size: 1.1rem;
-  font-weight: 600;
+    color: var(--main-title-default, #2c3e50);
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 .main-title:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 // 二级标题
 .sub-title {
-  font-size: 0.9rem;
-  font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 .sub-title:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 // 禁用文字选择
 .disabled-copy {
-  -ms-user-select: none !important;
-  -khtml-user-select: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  user-select: none !important;
+    -ms-user-select: none !important;
+    -khtml-user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    user-select: none !important;
 }
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-  background-color: #f5f5f5;
+    width: 7px;
+    height: 7px;
+    background-color: #f5f5f5;
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: #f5f5f5;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
 }
 
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-  background-color: #c8c8c8;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #c8c8c8;
 }
 
 ol,
 p,
 ul {
-  line-height: 1.7;
+    line-height: 1.7;
 }
 
 a {
-  font-weight: 500;
-  text-decoration: none;
+    font-weight: 500;
+    text-decoration: none;
 }
 
 .default-textc {
-  color: var(--color-default) !important;
+    color: var(--color-default) !important;
 }
 
 .ml-15 {
-  margin-left: 15px;
+    margin-left: 15px;
+}
+.mt-15 {
+    margin-top: 15px;
 }
 .pl-15 {
-  padding-left: 15px;
+    padding-left: 15px;
+}
+.pt-20 {
+    padding-top: 20px;
 }
 
 // global Html 代码块样式
 code {
-  color: #476582;
-  padding: 0.25rem 0.5rem;
-  margin: 0;
-  font-size: 0.8rem;
-  background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace !important;
+    color: #476582;
+    padding: 0.25rem 0.5rem;
+    margin: 0;
+    font-size: 0.8rem;
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New,
+        monospace !important;
 }

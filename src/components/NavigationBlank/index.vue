@@ -2,12 +2,18 @@
     <div class="navigation-blank">
         <a :href="currentValue" :rel="props.rel" :target="props.target">
             <slot></slot>
+            <el-icon class="custom-icon" color="#aaa" :size="15">
+                <View />
+            </el-icon>
         </a>
+
     </div>
 </template>
 
 <script lang='ts' setup >
 import { ref, watch, onMounted } from "vue"
+import { View } from '@element-plus/icons-vue'
+
 let currentValue = ref<string>("")
 const props = defineProps({
     modelValue: {
@@ -45,13 +51,20 @@ $color: var(--color-default);
     margin-left: 6px;
     padding-bottom: 8px;
     display: inline-block;
+
     a {
         color: $color;
 
+        .custom-icon {
+        }
+
         &:hover {
+            text-decoration: underline;
             cursor: pointer;
         }
     }
+
+
 
 }
 </style>

@@ -11,7 +11,7 @@ const javaScript: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/javaScript/jsBasic/index.vue"),
                 name: 'JsBasic',
-                meta: { title: 'Js Basic' }
+                meta: { title: 'Js 基础' }
             }
         ]
     },
@@ -156,7 +156,7 @@ const vue: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/vue/vue2Basic/index.vue"),
                 name: 'Vue2Basic',
-                meta: { title: 'Vue2 Basic' }
+                meta: { title: 'Vue2 基础' }
             }
         ]
     },
@@ -327,7 +327,7 @@ const react: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/react/reactBasic/index.vue"),
                 name: 'ReactBasic',
-                meta: { title: 'React Basic' }
+                meta: { title: 'React 基础' }
             }
         ]
     },
@@ -340,7 +340,7 @@ const react: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/react/reactAdvance/index.vue"),
                 name: 'ReactAdvance',
-                meta: { title: 'React Advance' }
+                meta: { title: 'React 进阶' }
             }
         ]
     },
@@ -366,7 +366,7 @@ const react: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/react/reactStatusManage/index.vue"),
                 name: 'ReactStatusManage',
-                meta: { title: 'React Status Manage' }
+                meta: { title: 'React 状态管理' }
             }
         ]
     },
@@ -379,7 +379,7 @@ const react: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/react/reactIsomorphism/index.vue"),
                 name: 'ReactIsomorphism',
-                meta: { title: 'React Isomorphism' }
+                meta: { title: 'React 同构' }
             }
         ]
     },
@@ -392,7 +392,7 @@ const react: Array<RouteRecordRaw> = [
                 path: 'index',
                 component: () => import("@/views/react/reactComponent/index.vue"),
                 name: 'ReactComponent',
-                meta: { title: 'React Component' }
+                meta: { title: 'React 组件封装' }
             }
         ]
     },

@@ -1,7 +1,7 @@
 <template>
   <h3 id="ThisBind">
     <RouterLink to="#ThisBind" class="a-link">#</RouterLink>
-    1、This绑定
+    2、This绑定
   </h3>
   <div>
     <h4 id="DefaultBind">
@@ -33,48 +33,54 @@
         <ul>
           <li>
             apply
-            <ul type="cricle">
-              <li>
-                <code>func.apply(thisArg,[argsArray])</code>,<code>thisArg</code>为<code>undefined | null</code>
-                时指向全局;
-              </li>
-              <li>
-                返回调用指定<code>this</code>值和参数函数的结果;
-              </li>
-            </ul>
+            <div>
+              <ul type="cricle">
+                <li>
+                  <code>func.apply(thisArg,[argsArray])</code>,<code>thisArg</code>为<code>undefined | null</code>
+                  时指向全局;
+                </li>
+                <li>
+                  返回调用指定<code>this</code>值和参数函数的结果;
+                </li>
+              </ul>
+            </div>
           </li>
           <li>
             call
-            <ul type="cricle">
-              <li>
-                <code>func.call(thisArg,arg1,arg2,....)</code>;
-              </li>
-              <li>
-                返回调用者提供的<code>this</code>值和参数调用该函数的返回值，若该方法没有返回值，则返回
-                <code>undefined</code>;
-              </li>
-            </ul>
+            <div>
+              <ul type="cricle">
+                <li>
+                  <code>func.call(thisArg,arg1,arg2,....)</code>;
+                </li>
+                <li>
+                  返回调用者提供的<code>this</code>值和参数调用该函数的返回值，若该方法没有返回值，则返回
+                  <code>undefined</code>;
+                </li>
+              </ul>
+            </div>
           </li>
           <li>
             bind
-            <ul type="cricle">
-              <li>
-                <code>func.bind(thisArg,arg1,arg2,....)</code>;
-              </li>
-              <li>
-                <code>thisArg</code>: 调用绑定函数时作为<code>this</code>参数传递给目标函数的值。如果使用
-                <code>new</code>运算符构造绑定函数，则忽略该值。当使用<code>bind</code>在<code>setTimeout</code>
-                中创建一个函数(作为回调提供)时，作为<code>thisArg</code>传递的任何值都将转换为<code>object</code>
-                。如果<code>bind</code>函数的参数列表为空，或者<code>thisArg</code>是<code>null | undefined</code>
-                ，执行作用域的<code>this</code>将被视为新函数的<code>thisArg</code>;
-              </li>
-              <li>
-                返回一个原函数的拷贝，并拥有指定<code>this</code>值和初始参数
-              </li>
-              <li>
-                MDN的<code>this</code>实现
-              </li>
-            </ul>
+            <div>
+              <ul type="cricle">
+                <li>
+                  <code>func.bind(thisArg,arg1,arg2,....)</code>;
+                </li>
+                <li>
+                  <code>thisArg</code>: 调用绑定函数时作为<code>this</code>参数传递给目标函数的值。如果使用
+                  <code>new</code>运算符构造绑定函数，则忽略该值。当使用<code>bind</code>在<code>setTimeout</code>
+                  中创建一个函数(作为回调提供)时，作为<code>thisArg</code>传递的任何值都将转换为<code>object</code>
+                  。如果<code>bind</code>函数的参数列表为空，或者<code>thisArg</code>是<code>null | undefined</code>
+                  ，执行作用域的<code>this</code>将被视为新函数的<code>thisArg</code>;
+                </li>
+                <li>
+                  返回一个原函数的拷贝，并拥有指定<code>this</code>值和初始参数
+                </li>
+                <li>
+                  MDN的<code>this</code>实现
+                </li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>
@@ -101,20 +107,22 @@
         <ul>
           <li>ES6之前使用：<code>instanceof</code></li>
           <li>ES6之后
-            <ul type="cricle">
-              <li>
-                1. new.target 实现：《ECMAScript 6 入门》中讲到:
-                ES6 为 new 命令引入了一个 <code>new.target</code> 属性，
-                该属性一般用在构造函数之中，返回 <code>new</code> 命令作用于的那个构造函数。
-                如果构造函数不是通过 <code>new</code> 命令或 <code>Reflect.construct()</code>
-                调用的，<code>new.target</code> 会返回 <code>undefined</code> ，因此这个属性可以用来确定构造函数是怎么调用的。
-              </li>
-              <li>
-                2. 使用 Class：<code>ES6</code> 提供 <code>Class</code> 作为构造函数的语法糖，
-                来实现语义化更好的面向对象编程，
-                并且对 <code>Class</code> 进行了规定：类的构造器必须使用 <code>new</code> 来调用。
-              </li>
-            </ul>
+            <div>
+              <ul type="cricle">
+                <li>
+                  1. new.target 实现：《ECMAScript 6 入门》中讲到:
+                  ES6 为 new 命令引入了一个 <code>new.target</code> 属性，
+                  该属性一般用在构造函数之中，返回 <code>new</code> 命令作用于的那个构造函数。
+                  如果构造函数不是通过 <code>new</code> 命令或 <code>Reflect.construct()</code>
+                  调用的，<code>new.target</code> 会返回 <code>undefined</code> ，因此这个属性可以用来确定构造函数是怎么调用的。
+                </li>
+                <li>
+                  2. 使用 Class：<code>ES6</code> 提供 <code>Class</code> 作为构造函数的语法糖，
+                  来实现语义化更好的面向对象编程，
+                  并且对 <code>Class</code> 进行了规定：类的构造器必须使用 <code>new</code> 来调用。
+                </li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>
