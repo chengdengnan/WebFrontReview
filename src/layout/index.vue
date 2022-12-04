@@ -1,7 +1,7 @@
 <template>
     <div class="app-wrapper">
         <el-container>
-            <el-header class="el-header" height="72px">
+            <el-header class="el-header" :height="navbarHeight">
                 <Navbar />
             </el-header>
             <el-container class="el-container">
@@ -18,7 +18,7 @@
                         <DArrowRight v-show="!showSideber" />
                     </el-icon>
                 </div>
-                <el-main class="el-main">
+                <el-main class="el-main" @scroll="handleScroll">
                     <app-main />
                 </el-main>
             </el-container>
@@ -33,12 +33,48 @@ import Navbar from "./components/Navbar/index.vue";
 import AppMain from "./components/AppMain.vue";
 import Sidebar from "./components/Sidebar/index.vue";
 import { DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
+import { useRoute, useRouter } from "vue-router"
+// current route object
+const route = useRoute();
+// global router
+const router = useRouter();
+// drag elemnt
 const mouseMove = ref<HTMLElement>();
-const customAside = ref<any>();
+// min sidebar width
 const minSidebarWidth = ref<string | number>(200);
+// setTimeout
+const timer = ref<any>(null)
+// init sidebarWidth Or drag sidebarWidth
 let sidebarWidth = ref<string | number>(localStorage.getItem('sidebarWidth') ?? '18rem');
+// navbar height
+const navbarHeight = ref<string>("72px")
+// show | hidden sidebar
 let showSideber = ref<boolean>(true)
+
+
+// methods
 const handleCollapse = () => (showSideber.value = !showSideber.value)
+const handleScroll = () => {
+    if (timer.value) {
+        clearTimeout(timer.value)
+    }
+    timer.value = setTimeout(() => {
+        nextTick(() => {
+            const h4 = document.getElementsByTagName('h4');
+            if (h4.length > 0)
+                for (let i of h4) {
+                    // DOMRect: Object 距离顶部高度
+                    const DOMRect = i.getBoundingClientRect()
+                    const currentHash = '#' + i.id;
+                    if (DOMRect.top > 0 && DOMRect.top < 220 && route.hash !== currentHash) {
+                        // console.log(i.getBoundingClientRect());
+                        // update hash
+                        router.push({ path: route.path, hash: currentHash })
+                    }
+                }
+        })
+    }, 400)
+}
 
 onMounted(() => {
     mouseMove.value!.onmousedown = (e) => {
@@ -61,16 +97,6 @@ onMounted(() => {
         }
         document.onmouseup = () => (document.onmousemove = document.onmouseup = null)
     }
-    // mouseMove.value!.onmouseenter = () => {
-    //     // nextTick(() => {
-    //     customAside.value.$el.style.setProperty('overflow-y', 'hidden', 'important');
-    //     // customAside.value.$el.style['overflow-y'] = 'hidden'
-    //     // })
-    //     console.log('11111111', customAside.value.$el);
-    // }
-    // mouseMove.value!.onmouseleave = () => (nextTick(() => {
-    //     customAside.value.$el.style.setProperty('overflow-y', 'auto', 'important')
-    // }))
 })
 
 </script>
@@ -141,8 +167,6 @@ onMounted(() => {
 
         }
     }
-
-
 
     .el-main {
         flex: 1 !important;

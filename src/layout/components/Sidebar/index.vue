@@ -73,7 +73,7 @@ watch(() => route.hash, async (newVal, oldVal) => {
         nextTick(() => {
             const Elment = document.querySelector(newVal) as HTMLElement;
             if (!Elment) return
-            Elment.scrollIntoView({ behavior: "auto", block: "start", inline: "center" })
+            Elment.scrollIntoView({ behavior: "smooth", block: "start", inline: "center" })
         })
     }
 }, { immediate: true })

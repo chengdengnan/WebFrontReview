@@ -93,7 +93,7 @@
         </h4>
         <section>
             <p>
-                实际上，<code>diff</code> 算法探讨的就是虚拟 <code>DOM</code> 树发生变化后，生成 <code>DOM</code> 
+                实际上，<code>diff</code> 算法探讨的就是虚拟 <code>DOM</code> 树发生变化后，生成 <code>DOM</code>
                 树更新补丁的方式。它通过对比新旧两株虚拟 <code>DOM</code> 树的变更差异，
                 将更新补丁作用于真实 <code>DOM</code> ，以最小成本完成视图更新。
             </p>
@@ -110,6 +110,7 @@
                     </li>
                 </ul>
             </div>
+            <p class="c-h6">待完善,请等候.....</p>
         </section>
     </div>
     <div>
@@ -117,18 +118,104 @@
             <RouterLink to="#ReactKey" class="a-link">#</RouterLink>
             4、React key是干嘛用的，为什么要加？key主要是解决哪一类问题的
         </h4>
+        <section>
+            <p class="indent">
+                <code>keys</code>是<code>React</code>用于追踪那些列表中元素被修改、被添加或者被移除的辅助标识。
+                在开发过程中，我们需要保证某个元素的<code>key</code>在同级元素中具有唯一性。
+            </p>
+            <p class="indent">
+                在<code>React Diff</code>算法中<code>React</code>会借助元素的<code>key</code>值来判断该元素是新
+                创建的还是被移动而来的元素，从而减少不必要的元素重新渲染。此外，<code>React</code>还需要借助
+                <code>key</code>值来判断元素与本地状态的关联关系。
+            </p>
+            <p class="c-h7">注意事项：</p>
+            <div>
+                <ul>
+                    <li>
+                        <code>key</code>值一定要和具体的元素--对应
+                    </li>
+                    <li>
+                        尽量不要用数组的<code>index</code>去作为<code>key</code>
+                    </li>
+                    <li>
+                        不要在<code>render</code>的时候，用随机数或者其他操作给元素加上不稳定的<code>key</code>，
+                        这样造成的性能开销比不加<code>key</code>的情况下更糟糕。
+                    </li>
+                </ul>
+            </div>
+        </section>
     </div>
     <div>
         <h4 id="ActualDOM">
             <RouterLink to="#ActualDOM" class="a-link">#</RouterLink>
             5、虚拟DOM的引入与直接操作原生DOM相比，哪一个效率更高，为什么
         </h4>
+        <section>
+            <p class="indent">
+                虚拟<code>DOM</code>相对原生的<code>DOM</code>不一定是效率更高，如果只修改一个按钮的文案，那么虚拟
+                <code>DOM</code>的操作无论如何都不可能比真实的<code>DOM</code>操作更快。在首次渲染大量<code>DOM</code>
+                时，由于多了一层虚拟<code>DOM</code>的计算，虚拟<code>DOM</code>也会比<code>innerHTML</code>插入慢。
+                它能保证性能下限，在真实<code>DOM</code>操作的时候进行针对性优化时，还是更快的。所以要根据具体的场景
+                进行探讨，不能以偏概全。
+            </p>
+            <p class="indent">
+                在整个<code>DOM</code>操作的演化过程中，其实主要矛盾并不在于性能，而在于开发者写的爽不爽，在于
+                <span class="c-h7">研发体验/研发效率</span>。虚拟<code>DOM</code>不是别的，正是前端开发们为了
+                更好的研发体验和研发效率而创建出来的高阶产物。虚拟<code>DOM</code>并不一定能带来更好的性能，
+                <code>React</code>官方也从来没有把虚拟<code>DOM</code>作为性能层面的卖点对外输出过。
+            </p>
+            <p class="red">
+                虚拟<code>DOM</code>的优越之处在于，它能够提供更爽、更高效的研发模式(也就是函数式的 UI 编程方式)的同时，
+                仍然保持一个还不错的性能。
+            </p>
+        </section>
     </div>
     <div>
         <h4 id="ReactDiffAndVueDiff">
             <RouterLink to="#ReactDiffAndVueDiff" class="a-link">#</RouterLink>
             6、React与Vue的diff算法有何不同？
         </h4>
+        <section>
+            <p class="indent">
+                <code>Diff</code>算法是指生成更新补丁的方式，主要应用于虚拟<code>DOM</code>树变化后，更新真实<code>DOM</code>。
+                所以<code>diff</code>算法一定存在这样一个过程：<span class="c-h7">
+                    触发更新 --> 生成补丁 --> 应用补丁
+                </span>
+            </p>
+            <p class="indent">
+                <code>React</code>的<code>diff</code>算法，触发更新的时机主要在<code>state</code>变化与<code>hooks</code>
+                调用之后。此时触发虚拟<code>DOM</code>树变更差异，采用了深度优先遍历算法。但传统的的遍历方式，效率更低。
+                为了优化效率，采用了分治的方式。将单一节点的对比转换为了3种类型节点的对比，分别是树、组件及元素，以此提高效率。
+            </p>
+            <div>
+                <ul>
+                    <li>
+                        <span class="c-h7">树对比：</span>
+                        由于网页视图中较少有跨层级节点移动，两株虚拟<code>DOM</code>树只对同一层级的节点进行比较。
+                    </li>
+                    <li>
+                        <span class="c-h7">组件对比：</span>
+                        如果组件是同一类型，则进行树对比，如果不是则直接放入到补丁中。
+                    </li>
+                    <li>
+                        <span class="c-h7">元素对比：</span>
+                        主要发生在同层级中，通过标记节点操作生成补丁，节点操作对应真实<code>DOM</code>的裁剪操作。
+                    </li>
+                </ul>
+            </div>
+            <p class="indent">
+                以上是经典的<code>React Diff</code>算法内容。自 <code>React 16</code>起，引入了<code>Fiber</code>架构。
+                为了使整个更新过程可随时暂停恢复，节点和树分别采用了<code>FiberNode</code>和<code>FiberTree</code>进行了
+                重构。<code>FiberNode</code>使用了双链表的结构，可以直接找到兄弟节点与子节点。整个更新过程由
+                <code>current</code>与<code>workInProgress</code>两株树双缓冲完成。<code>workInProgress</code>更新
+                完成后，再通过修改<code>current</code>相关指针指向新节点。
+            </p>
+            <p class="indent c-h7">
+                <code>Vue</code>的整体<code>diff</code>策略与<code>React</code>对齐，虽然缺乏时间切片能力，但这并不意味着
+                <code>Vue</code>的性能更差，因为在<code>Vue3</code>初期引入过后期因为收益不高移除掉了。除了高帧率动画，
+                在<code>Vue</code>中其他的场景几乎都可以使用防抖和节流去提高响应性能。
+            </p>
+        </section>
     </div>
 </template>
 

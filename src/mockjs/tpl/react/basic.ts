@@ -78,7 +78,7 @@ const dataSource: Array<GlobalSidebar> = [
             {
                 id: 2,
                 hashId: "ReactGrammar",
-                title: "基础语法",
+                title: "React 基础",
                 routeName: "ReactBasic",
                 children: [
                     {
