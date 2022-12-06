@@ -38,7 +38,7 @@ const dataSource: Array<GlobalSidebar> = [
                 routeName: "ReactBasic",
                 children: [
                     {
-                        id:1102,
+                        id: 1102,
                         parentId: 1,
                         hashId: "CreateVirtualDOM",
                         title: "虚拟DOM的两种创建方式"
@@ -102,22 +102,21 @@ const dataSource: Array<GlobalSidebar> = [
                     {
                         id: 110,
                         parentId: 2,
-                        hashId: "ReactState",
-                        title: "state的理解和使用"
-                    },
-
-                    {
-                        id: 111,
-                        parentId: 2,
                         hashId: "HasStateComponent",
                         title: "有无状态组件"
                     },
                     {
-                        id: 112,
+                        id: 111,
                         parentId: 2,
                         hashId: "ControlComponent",
                         title: "受控组件和非受控组件"
                     },
+                    {
+                        id: 112,
+                        parentId: 2,
+                        hashId: "EventBind",
+                        title: "事件绑定"
+                    }
                 ]
             },
             {
@@ -125,7 +124,7 @@ const dataSource: Array<GlobalSidebar> = [
                 hashId: "ReactLifeCycle",
                 title: "组件生命周期",
                 routeName: "ReactBasic",
-                children:[
+                children: [
                     {
                         id: 113,
                         parentId: 3,
@@ -143,7 +142,7 @@ const dataSource: Array<GlobalSidebar> = [
                         parentId: 3,
                         hashId: "ReactDiscardLifeCycle",
                         title: "React废弃的生命周期"
-                    },
+                    }
                 ]
             }
         ]

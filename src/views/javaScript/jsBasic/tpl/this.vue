@@ -163,8 +163,8 @@ stractDemo();
 );
 
 const ObjectMethod = $builtIn(`
-let name = 'Global Barry';
-let obj = {
+var name = 'Global Barry';
+var obj = {
     name: 'Obj Barry',
     getName: function(){
         console.log(this.name)
@@ -226,7 +226,7 @@ o.say(); // Fashion Barry  is undefined years
 /**
  * 【解析】：
  * 函数内部的【this】指向于此函数的调用者（拥有者）
- * 但在上面这个例子中，为什么会输出unidentified
+ * 但在上面这个例子中，为什么会输出undefined
  * 虽然【callback】定义在对象【o】的【say】方法中，但实际上由于【callback】是在【func】函数中被普通调用的
  * 那么【func】中的【callback】的调用对象我们可以理解为【window】对象
  * 当使用一个对象未定义的属性时不会报错，会返回undefined，而直接使用一个未定义的变量便会报错

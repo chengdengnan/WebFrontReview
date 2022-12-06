@@ -64,12 +64,41 @@
             <RouterLink to="#FunctionComponent" class="a-link">#</RouterLink>
             2、函数式组件
         </h4>
+        <section>
+            <p>在<code>react</code>中可以使用【 函数 】的形式来创建一个组件：</p>
+            <WebPrismEditor v-model="FunComponent"></WebPrismEditor>
+
+        </section>
     </div>
     <div>
         <h4 id="ClassComponent">
             <RouterLink to="#ClassComponent" class="a-link">#</RouterLink>
             3、类式组件
         </h4>
+        <section>
+            <p>在<code>react</code>中可以使用【 类 】的形式来创建一个组件：</p>
+            <WebPrismEditor v-model="ClassComponent"></WebPrismEditor>
+            <p class="c-h7">两种组件的区别：</p>
+            <div>
+                <ul>
+                    <li>
+                        加载<code>props</code>方式不同，【函数式】定义组件从组件函数加载;【类式】的组件通过
+                        <code>this.props</code>获取传入的参数
+                    </li>
+                    <li>
+                        【函数式】组件比较简单，内部无法维护状态(因为没有 this,新版本的hook解决了次问题);
+                        【类式】内部可以通过<code>this.state</code>和<code>this.setState</code>方法定义
+                        和更新内部的<code>state</code>，同时更新<code>header</code>里面函数的渲染结果
+                    </li>
+                    <li>
+                        【类式】组件内部可以定义更多的方法在实例上，但是【函数式】组件无法定义
+                    </li>
+                    <li>
+                        【类式】组件需要使用<code>new</code>实例化，函数式组件直接使用
+                    </li>
+                </ul>
+            </div>
+        </section>
     </div>
     <div>
         <h4 id="HasStateComponent">
@@ -112,6 +141,24 @@ const JSXElement = $builtIn(`<div>
     <p>{0 && <p>true</p>}{/* 与门如果出现非布尔值，渲染与预期有出入，渲染出0 */}</p>
     <p>{0 ? null : <p>true</p>} {/* 建议使用三目运算符 */}</p>
 </div>`)
+
+const FunComponent = $builtIn(`
+function Demo(props) {
+    return <h2>{props.text || 'My name is Function Component'}</h2>;
+}
+ReactDOM.render(<Demo />, document.getElementById("container"));`)
+
+const ClassComponent = $builtIn(`
+class Demo extends React.Component {
+    render() {
+      // render是放在哪里的？—— Demo的原型对象上，供实例使用
+      // render中this是谁？—— Demo组件的实例对象
+      return <h2>{ this.props.text || 'My name is Class Component'}</h2>;
+    }
+}
+ReactDOM.render(<Demo />, document.getElementById("container"));`)
+
+
 </script>
 
 <style lang='scss'>
