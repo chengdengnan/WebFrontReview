@@ -100,6 +100,12 @@ const dataSource: Array<GlobalSidebar> = [
                         title: "类式组件"
                     },
                     {
+                        id: 1109,
+                        parentId: 2,
+                        hashId: "StateAndSetState",
+                        title: "state与setState的理解使用"
+                    },
+                    {
                         id: 110,
                         parentId: 2,
                         hashId: "HasStateComponent",
