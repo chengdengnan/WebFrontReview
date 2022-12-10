@@ -1,5 +1,6 @@
 // 20: sidebar 18 + padding 2
-$border-color: var(--color-default);
+$default-color: var(--color-default);
+$color-default-rgba: var(--color-default-rgba);
 $title-color: #2c3e50;
 .main {
     max-width: 100%;
@@ -62,7 +63,7 @@ $title-color: #2c3e50;
         margin: 10px 0;
     }
     // 五级标题，不加粗，加重显示
-    .c-h7{
+    .c-h7 {
         color: #000;
     }
     // 一级内容下的直接子元素
@@ -88,7 +89,7 @@ $title-color: #2c3e50;
             transition: opacity 0.5s linear;
             &:hover {
                 cursor: pointer;
-                border-bottom: 2px solid $border-color;
+                border-bottom: 2px solid $default-color;
             }
         }
         &:hover {
@@ -104,12 +105,28 @@ $title-color: #2c3e50;
         color: red;
         font-weight: 600;
     }
+    // 注意块样式
+    .be-careful {
+        width: 78%;
+        background-color: $color-default-rgba;
+        border-left-color: $default-color;
+        border-left-width: 9px;
+        border-left-style: solid;
+        line-height: 30px;
+        padding: 20px 45px 20px 26px;
+        padding: 20px 45px 20px 26px;
+        margin: 20px -30px 30px -10px;
+        .title {
+            font-size: 17px;
+            font-weight: 700;
+        }
+    }
 
     // 外链
     .a-navigation {
         font-size: 0.9em;
         display: inline-block;
-        color: $border-color;
+        color: $default-color;
         margin-left: 10px;
         padding-bottom: 8px;
     }

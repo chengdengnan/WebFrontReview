@@ -103,7 +103,19 @@ const dataSource: Array<GlobalSidebar> = [
                         id: 1109,
                         parentId: 2,
                         hashId: "StateAndSetState",
-                        title: "state与setState的理解使用"
+                        title: "state与setState"
+                    },
+                    {
+                        id: 1110,
+                        parentId: 2,
+                        hashId: "ReactProps",
+                        title: "props的理解与使用"
+                    },
+                    {
+                        id: 1111,
+                        parentId: 2,
+                        hashId: "ReactRef",
+                        title: "ref的理解与使用"
                     },
                     {
                         id: 110,

@@ -148,9 +148,76 @@
         </section>
     </div>
     <div>
+        <h4 id="ReactProps">
+            <RouterLink to="#ReactProps" class="a-link">#</RouterLink>
+            5、props的理解与使用
+        </h4>
+        <section>
+            <div class="overview">
+                <NavigationBlank v-model="ReactPropTypesLink">使用 PropTypes 进行类型检查</NavigationBlank>
+            </div>
+            <p class="c-h7">理解：</p>
+            <div>
+                <ul>
+                    <li>每个组件对象都会有<code>props( prototies 的简写 )</code>属性</li>
+                    <li>组件标签的所有属性，都保存在<code>props</code>中</li>
+                </ul>
+            </div>
+            <p class="c-h7">作用：</p>
+            <div>
+                <ul>
+                    <li>通过标签属性从【组件外】向【组件内】传递变化的数据</li>
+                    <li>注意：组件内部不要修改<code>props</code>数据</li>
+                </ul>
+            </div>
+            <blockquote class="be-careful">
+                <p class="title">注意：</p>
+                <div>
+                    自 <code>React v15.5</code> 起，<code>React.PropTypes</code>
+                    已移入另一个包中。请使用 <code>prop-types</code> 库 代替。我们提供了一个 <code>codemod</code>
+                    脚本来做自动转换。
+                </div>
+            </blockquote>
+            <p class="c-h6">类式组件使用 props</p>
+            <WebPrismEditor v-model="ClassComponentProps"></WebPrismEditor>
+            <p class="c-h6">函数式组件使用 props</p>
+            <WebPrismEditor v-model="FuncComponentProps"></WebPrismEditor>
+        </section>
+    </div>
+    <div>
+        <h4 id="ReactRef">
+            <RouterLink to="#ReactRef" class="a-link">#</RouterLink>
+            6、ref的理解与使用
+        </h4>
+        <section>
+            <p class="c-h6">写法1：字符串写法(不推荐--效率不高且可能会在未来版本移除)</p>
+            <WebPrismEditor v-model="StringRef"></WebPrismEditor>
+            <p class="c-h6">写法2：回调函数写法</p>
+            <WebPrismEditor v-model="CallbackRef"></WebPrismEditor>
+            <section>
+                <blockquote class="be-careful">
+                    <p class="title">注意：关于回调 refs 的说明</p>
+                    <div>
+                        如果 ref 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数
+                        <code>null</code> ，然后第二次会传入参数 <code>DOM</code> 元素。
+                        这是因为在每次渲染时会创建一个新的函数实例，
+                        所以 <code>React</code> 清空旧的 <code>ref</code> 并且设置新的。
+                        通过将 <code>ref</code> 的回调函数定义成 <code>class</code> 的绑定函数的
+                        方式可以避免上述问题，但是大多数情况下它是无关紧要的。
+                    </div>
+                </blockquote>
+                <p class="c-h7">将 <code>ref</code> 的回调函数定义成 <code>class</code> 的绑定函数</p>
+                <WebPrismEditor v-model="CallbackRef2"></WebPrismEditor>
+            </section>
+
+            <p class="c-h6">写法3：createRef 写法(最新)</p>
+            <WebPrismEditor v-model="CreateRef"></WebPrismEditor>
+        </section>
+    </div>
+    <div>
         <h4 id="HasStateComponent">
             <RouterLink to="#HasStateComponent" class="a-link">#</RouterLink>
-            5、有无状态组件
+            7、有无状态组件
         </h4>
         <section>
             <div>
@@ -300,7 +367,7 @@
     <div>
         <h4 id="ControlComponent">
             <RouterLink to="#ControlComponent" class="a-link">#</RouterLink>
-            6、受控组件和非受控组件
+            8、受控组件和非受控组件
         </h4>
     </div>
 </template>
@@ -309,6 +376,10 @@
 import { getCurrentInstance, ref } from "vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;
+
+const ReactPropTypesLink = ref<String>
+    ("https://zh-hans.reactjs.org/docs/typechecking-with-proptypes.html#gatsby-focus-wrapper")
+
 
 const JSXGrammar = $builtIn(`const arr = ["Vue", "React", "Angular"];
 const virtualDOM = (
@@ -403,7 +474,172 @@ class Weather extends React.Component {
     }
 }`)
 
+const ClassComponentProps = $builtIn(`
+class Person extends React.Component {
+  // 开发过程中可以忽略，基本上不需要写
+  // constructor(props) {
+  //   // 构造器是否接收props，是否传递给super，
+  //   // 取决于：是否希望在构造器中通过 this 访问 props
+  //   super(props);
+  // }
 
+  // 如何限制 props 数据类型
+  // React 16 之前,React 15.5开始已弃用
+  // static propTypes = {
+  // name: React.PropTypes.string.isRequired,
+  // sex: React.PropTypes.string,
+  // age: React.PropTypes.number,
+  // speak: React.PropTypes.func,
+  // };
+  /**
+   * 使用 prop-types 库进行限制
+   * 需要引入 prop-types 库
+   */
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    sex: PropTypes.string,
+    age: PropTypes.number,
+    speak: PropTypes.func,
+  };
+  // 指定默认标签属性值
+  static defaultProps = {
+    sex: "未知",
+    age: 6,
+  };
+
+  render() {
+    // props 是只读的
+    console.log("props", this.props);
+    const { name, age, sex } = this.props;
+    const speak = this.props.speak
+      ? this.props.speak.bind(this)
+      : () => console.log("请添加方法");
+    return (
+      <div>
+        <ul>
+          <li>姓名：{name}</li>
+          <li>年龄：{age}</li>
+          <li>性别：{sex}</li>
+          <li>
+            <button onClick={speak}>说话</button>
+          </li>
+        </ul>
+      </div>
+    );
+  }
+}
+function speak() {
+  console.log(this.props.name + '：说话了');
+}
+//方法传递
+ReactDOM.render(
+  <Person name="Barry" age={20} speak={speak} />,
+  document.getElementById("container")
+);
+
+// 批量传递 props
+const personInformation = { name: "Lishen", age: 22, sex: "男" };
+// 扩展属性：将对象所有的属性通过 props 传递
+ReactDOM.render(
+  <Person {...personInformation} />,
+  document.getElementById("container2")
+);`)
+
+const FuncComponentProps = $builtIn(`
+function Person(props) {
+    console.log("props", props);
+    const { name, sex, age } = props;
+    return (
+      <ul>
+        <li>姓名：{name}</li>
+        <li>性别：{sex}</li>
+        <li>年龄：{age}</li>
+      </ul>
+    );
+}
+// 如何限制 props 数据类型
+// React 16 之前,React 15.5开始弃用
+//   Person.propTypes = {
+//    name: React.PropTypes.string.isRequired,
+//    sex: React.PropTypes.string,
+//    age: React.PropTypes.number,
+//   };
+/**
+  * 使用 prop-types 库进行限制
+  * 需要引入 prop-types 库
+ */
+Person.propTypes = {
+  name: PropTypes.string.isRequired,
+  sex: PropTypes.string,
+  age: PropTypes.number,
+};
+// 指定默认标签属性值
+Person.defaultProps = {
+  sex: "未知",
+  age: 6,
+};
+ReactDOM.render(
+  <Person name="Barry" age={18} />,
+  document.getElementById("container")
+);`)
+
+const StringRef = $builtIn(`
+class Demo extends React.Component {
+  handleLeftClick = () => {
+    alert(this.refs.leftInput.value);
+  };
+  render() {
+    return (
+      <div>
+        <input ref="leftInput" type="text" placeholder="请输入数据" />
+        &nbsp;
+        <button onClick={this.handleLeftClick}>点击提示左侧数据</button>
+      </div>
+    );
+  }
+}
+ReactDOM.render(<Demo />, document.getElementById("container"));`)
+
+const CallbackRef = $builtIn(`
+class Demo2 extends React.Component {
+  handleLeftClick = () => {
+    alert(this.leftInput2.value);
+  };
+  render() {
+    return (
+      <div>
+        <input
+          ref={(currentNode) => (this.leftInput2 = currentNode)}
+          type="text"
+          placeholder="请输入数据"
+        />
+        &nbsp;
+        <button onClick={this.handleLeftClick}>点击提示左侧数据</button>
+      </div>
+    );
+  }
+}
+ReactDOM.render(<Demo2 />, document.getElementById("container2"));`)
+
+const CallbackRef2 = $builtIn(`
+class Demo3 extends React.Component {
+  // 通过将 ref 的回调函数定义成 class 的绑定函数的方式可以避免更新过程中它会被执行两次
+  saveRef = (currentNode) => {
+    this.rightInput2 = currentNode;
+  };
+  render() {
+    return (
+      <div>
+        <input ref={this.saveRef} type="text" placeholder="请输入数据" />
+      </div>
+    );
+  }
+}
+ReactDOM.render(<Demo3 />, document.getElementById("container2"));`)
+
+
+const CreateRef = $builtIn(`
+`)
 </script>
 
 <style lang='scss'>
