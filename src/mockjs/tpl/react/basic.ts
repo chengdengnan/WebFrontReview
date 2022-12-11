@@ -133,7 +133,7 @@ const dataSource: Array<GlobalSidebar> = [
                         id: 112,
                         parentId: 2,
                         hashId: "EventBind",
-                        title: "事件绑定"
+                        title: "事件代理"
                     }
                 ]
             },

@@ -194,23 +194,23 @@
             <WebPrismEditor v-model="StringRef"></WebPrismEditor>
             <p class="c-h6">写法2：回调函数写法</p>
             <WebPrismEditor v-model="CallbackRef"></WebPrismEditor>
-            <section>
-                <blockquote class="be-careful">
-                    <p class="title">注意：关于回调 refs 的说明</p>
-                    <div>
-                        如果 ref 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数
-                        <code>null</code> ，然后第二次会传入参数 <code>DOM</code> 元素。
-                        这是因为在每次渲染时会创建一个新的函数实例，
-                        所以 <code>React</code> 清空旧的 <code>ref</code> 并且设置新的。
-                        通过将 <code>ref</code> 的回调函数定义成 <code>class</code> 的绑定函数的
-                        方式可以避免上述问题，但是大多数情况下它是无关紧要的。
-                    </div>
-                </blockquote>
-                <p class="c-h7">将 <code>ref</code> 的回调函数定义成 <code>class</code> 的绑定函数</p>
-                <WebPrismEditor v-model="CallbackRef2"></WebPrismEditor>
-            </section>
+            <blockquote class="be-careful">
+                <p class="title">注意：关于回调 refs 的说明</p>
+                <div>
+                    如果 ref 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数
+                    <code>null</code> ，然后第二次会传入参数 <code>DOM</code> 元素。
+                    这是因为在每次渲染时会创建一个新的函数实例，
+                    所以 <code>React</code> 清空旧的 <code>ref</code> 并且设置新的。
+                    通过将 <code>ref</code> 的回调函数定义成 <code>class</code> 的绑定函数的
+                    方式可以避免上述问题，但是大多数情况下它是无关紧要的。
+                </div>
+            </blockquote>
+            <p class="c-h7">将 <code>ref</code> 的回调函数定义成 <code>class</code> 的绑定函数</p>
+            <WebPrismEditor v-model="CallbackRef2"></WebPrismEditor>
 
             <p class="c-h6">写法3：createRef 写法(最新)</p>
+            <p>调用后可以返回一个容器，该容器可以存储被 <code>ref</code> 所标识的节点,
+                该容器是【专人专用】，后声明的 <code>ref</code> 会覆盖前一个</p>
             <WebPrismEditor v-model="CreateRef"></WebPrismEditor>
         </section>
     </div>
@@ -369,6 +369,45 @@
             <RouterLink to="#ControlComponent" class="a-link">#</RouterLink>
             8、受控组件和非受控组件
         </h4>
+        <section>
+            <div>
+                <ul>
+                    <li>受控组件：表单数据是由<code>React</code>组件来管理的，推荐使用</li>
+                    <li>非受控组件：表单数据将交由<code>DOM</code>节点来处理，可以通过<code>ref</code>
+                        获取表单数据</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div>
+        <h4 id="EventBind">
+            <RouterLink to="#EventBind" class="a-link">#</RouterLink>
+            9、事件代理
+        </h4>
+        <section>
+            <div>
+                <ul>
+                    <li>通过 <code>onXxx</code> 属性指定事件处理函数（注意大小写）
+                        <div>
+                            <ul type="cricle">
+                                <li>React 使用的是自定义（合成）事件，而不是使用原生的 DOM 事件 ———— 为了更好的兼容性</li>
+                                <li>React 中的事件是通过【事件委托(事件代理)】方式处理的（委托给组件最外层的元素）————
+                                    为了跨端、兼容性和性能提升</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>通过 event.target 得到发生事件的 DOM 元素对象</li>
+                </ul>
+            </div>
+            <WebPrismEditor v-model="EventProxy"></WebPrismEditor>
+            <blockquote class="be-careful">
+                <p class="title">注意</p>
+                <div>
+                    异步操作最好将对象内部需要的值进行拷贝，否则会导致 <code>this</code> 指向问题。
+                </div>
+            </blockquote>
+            <WebPrismEditor v-model="AsyncEventProxy"></WebPrismEditor>
+        </section>
     </div>
 </template>
 
@@ -639,7 +678,77 @@ ReactDOM.render(<Demo3 />, document.getElementById("container2"));`)
 
 
 const CreateRef = $builtIn(`
-`)
+class Demo3 extends React.Component {
+  /**
+   * React.createRef()
+   * 调用后可以返回一个容器，该容器可以存储被ref所标识的节点
+   * 该容器是【专人专用】，后声明的ref会覆盖前一个
+   */
+  myRef = React.createRef();
+
+  handleClick = () => {
+    console.log(this.myRef.current.value);
+  };
+  render() {
+    return (
+      <div>
+        <input ref={this.myRef} type="text" placeholder="请输入数据" />
+        &nbsp;
+        <button onClick={this.handleClick}>点击提示左侧数据</button>
+      </div>
+    );
+  }
+}`)
+
+const EventProxy = $builtIn(`
+class Demo extends React.Component {
+    myRef = React.createRef();
+    handleClick = () => {
+      console.log(this.myRef.current.value);
+    };
+    handleBlur = (event) => {
+      console.log(event.target.value);
+    };
+    render() {
+      return (
+        <div>
+          <input ref={this.myRef} type="text" placeholder="请输入数据" />
+          &nbsp;
+          <button onClick={this.handleClick}>点击提示左侧数据</button>
+          <input
+            onBlur={this.handleBlur}
+            type="text"
+            placeholder="失去焦点提示数据"
+          />
+        </div>
+      );
+   }
+}`)
+
+const AsyncEventProxy = $builtIn(`
+class Demo extends React.Component {
+    handleAsyncClick = (event) => {
+      // 直接使用会报错
+      setTimeout(() => {
+        console.log(event.target.innerText);
+      }, 1000);
+
+      // 解决办法
+      let text = event.target.innerText;
+      setTimeout(() => {
+        console.log(text);
+      }, 1000);
+    };
+    render() {
+      return (
+        <div>
+          <button onClick={this.handleAsyncClick}>异步展示</button>
+        </div>
+      );
+   }
+}`)
+
+
 </script>
 
 <style lang='scss'>
