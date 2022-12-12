@@ -17,6 +17,9 @@
         <!-- Close Package -->
         <ClosePackage></ClosePackage>
 
+        <!-- Higher Order Function-->
+        <HigherOrderFunction></HigherOrderFunction>
+
         <!-- This Interview -->
         <ThisInterview></ThisInterview>
     </div>
@@ -28,6 +31,7 @@ import ThisBind from "./tpl/thisBind.vue";
 import ActionScope from "./tpl/actionScope.vue"
 import DeepClone from "./tpl/deepClone.vue"
 import ClosePackage from "./tpl/closePackage.vue"
+import HigherOrderFunction from "./tpl/higherOrderFunction.vue";
 import ThisInterview from "./tpl/thisInterview.vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;

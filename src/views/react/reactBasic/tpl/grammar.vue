@@ -85,7 +85,7 @@
                         <code>this.props</code>获取传入的参数
                     </li>
                     <li>
-                        【函数式】组件比较简单，内部无法维护状态(因为没有 this,新版本的hook解决了次问题);
+                        【函数式】组件比较简单，内部无法维护状态(因为没有 this,新版本的hook解决了这个问题);
                         【类式】内部可以通过<code>this.state</code>和<code>this.setState</code>方法定义
                         和更新内部的<code>state</code>，同时更新<code>header</code>里面函数的渲染结果
                     </li>
@@ -371,11 +371,14 @@
         </h4>
         <section>
             <div>
-                <ul>
-                    <li>受控组件：表单数据是由<code>React</code>组件来管理的，推荐使用</li>
-                    <li>非受控组件：表单数据将交由<code>DOM</code>节点来处理，可以通过<code>ref</code>
-                        获取表单数据</li>
-                </ul>
+                <p>受控组件：表单数据是由<code>React</code>组件来管理的，推荐使用。(类似于 vue 的双向绑定)</p>
+                <WebPrismEditor v-model="ControlledComponent"></WebPrismEditor>
+            </div>
+            <div>
+                <p>非受控组件：表单数据将交由<code>DOM</code>节点来处理，可以通过<code>ref</code>
+                    获取表单数据，不推荐使用</p>
+                <WebPrismEditor v-model="NoControlledComponent"></WebPrismEditor>
+
             </div>
         </section>
     </div>
@@ -746,6 +749,78 @@ class Demo extends React.Component {
         </div>
       );
    }
+}`)
+
+const ControlledComponent = $builtIn(`
+class Demo extends React.Component {
+  state = {
+    username: "",
+    password: "",
+  };
+  handleSubmit = () => {
+    event.preventDefault();
+    alert(
+      "用户名：" + this.state.username + "  密码：" + this.state.password
+    );
+  };
+  saveFormData = (type) => {
+    return (event) => {
+      this.setState({ [type]: event.target.value });
+    };
+  };
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        用户名：
+        <input
+          onChange={this.saveFormData("username")}
+          type="text"
+          name="username"
+        />
+        <br />
+        密码：
+        <input
+          onChange={this.saveFormData("password")}
+          type="password"
+          name="password"
+        />
+        <br />
+        <button>提交</button>
+      </form>
+    );
+  }
+}`)
+
+const NoControlledComponent = $builtIn(`
+class Demo extends React.Component {
+    handleSubmit = (event) => {
+      event.preventDefault();
+      const { username, password } = this;
+      alert('用户名：' + username.value + ' 密码：' + password.value);
+    };
+    render() {
+      return (
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            用户名：
+            <input
+              ref={(node) => (this.username = node)}
+              type="text"
+              name="username"
+            />
+            <br />
+            密 码：
+            <input
+              ref={(node) => (this.password = node)}
+              type="password"
+              name="password"
+            />
+            <br />
+            <button>登录</button>
+          </form>
+        </div>
+      );
+    }
 }`)
 
 

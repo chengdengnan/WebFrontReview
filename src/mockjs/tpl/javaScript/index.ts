@@ -170,6 +170,20 @@ const dataSource: Array<GlobalSidebar> = [
                 ]
             },
             {
+                id: 105,
+                hashId: "HigherOrderFunction",
+                title: "高阶函数",
+                routeName: "JsBasic",
+                children: [
+                    {
+                        id: 1109,
+                        parentId: 105,
+                        hashId: "FunctionCurrying",
+                        title: "函数柯里化"
+                    }
+                ]
+            },
+            {
                 id: 5,
                 hashId: "Interview",
                 title: "面试",

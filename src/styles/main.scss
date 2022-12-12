@@ -175,4 +175,9 @@ $title-color: #2c3e50;
             padding-bottom: 0.5rem;
         }
     }
+
+    // 去掉 li 前面的点
+    .list-style-none{
+        list-style-type: none;
+    }
 }
