@@ -140,14 +140,14 @@ const dataSource: Array<GlobalSidebar> = [
             {
                 id: 3,
                 hashId: "ReactLifeCycle",
-                title: "组件生命周期",
+                title: "生命周期",
                 routeName: "ReactBasic",
                 children: [
                     {
                         id: 113,
                         parentId: 3,
                         hashId: "ReactThouseLifeCycle",
-                        title: "React生命周期"
+                        title: "React组件生命周期"
                     },
                     {
                         id: 114,
@@ -158,9 +158,21 @@ const dataSource: Array<GlobalSidebar> = [
                     {
                         id: 114,
                         parentId: 3,
-                        hashId: "ReactDiscardLifeCycle",
-                        title: "React废弃的生命周期"
-                    }
+                        hashId: "ReactNewLifeCycle",
+                        title: "React新增的生命周期"
+                    },
+                    {
+                        id: 115,
+                        parentId: 3,
+                        hashId: "ReactNewLifeAndOldLife",
+                        title: "对比新旧生命周期"
+                    },
+                    {
+                        id: 116,
+                        parentId: 3,
+                        hashId: "ReactPerformanceOptimize",
+                        title: "React性能优化在哪个生命周期"
+                    },
                 ]
             }
         ]
