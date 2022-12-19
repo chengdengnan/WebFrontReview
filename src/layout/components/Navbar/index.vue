@@ -35,7 +35,7 @@ const router = useRouter();
 let keyword = ref<string>(""); // search
 
 const src = require("/src/assets/avatar.jpg")
-const redirectIndex = () => {
+const redirectIndex = (): void => {
     router.replace({ name: 'Index' })
 }
 </script>
@@ -60,6 +60,7 @@ const redirectIndex = () => {
         float: right;
         margin: 0 auto;
         padding-left: 1%;
+
         .header-title {
             margin-left: 1.5rem;
         }

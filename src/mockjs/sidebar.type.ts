@@ -34,7 +34,7 @@ interface SidebarItem {
     title: string;
 }
 
-// 通用查询根据子节点查出父节点
+// 通用查询,根据子节点查出父节点
 const getCurrentTreeNode = (hashId: string, data: any) => {
     if (!hashId || !data) throw new Error("Params can not empty!");
     const result: any = {
