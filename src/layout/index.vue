@@ -73,7 +73,7 @@ const handleScroll = () => {
                     }
                 }
         })
-    }, 100)
+    }, 0)
 }
 
 onMounted(() => {
