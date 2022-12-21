@@ -1,7 +1,7 @@
 <template>
     <div class="web-image" :style="{ width: props.width, height: props.height }">
         <el-image :src="props.modelValue" :zoom-rate="props.zoomRate" :preview-src-list="props.previewSrcList"
-            :initial-index="props.initialIndex" :fit="props.fit" :lazy="true" :infinite="props.infinite"></el-image>
+            :initial-index="props.initialIndex" :fit="props.fit" :lazy="false" :infinite="props.infinite"></el-image>
     </div>
 </template>
 

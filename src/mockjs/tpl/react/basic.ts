@@ -156,10 +156,16 @@ const dataSource: Array<GlobalSidebar> = [
                         title: "React废弃的生命周期"
                     },
                     {
-                        id: 116,
+                        id: 115,
                         parentId: 3,
                         hashId: "ReactPerformanceOptimize",
                         title: "React性能优化在哪个生命周期"
+                    },
+                    {
+                        id: 115,
+                        parentId: 3,
+                        hashId: "ReactNetworkRequest",
+                        title: "React网络请求在哪个生命周期"
                     },
                 ]
             }
