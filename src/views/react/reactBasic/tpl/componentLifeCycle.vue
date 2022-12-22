@@ -403,7 +403,49 @@
             4、React 中发起网络请求应该在哪个生命周期中进行，为什么？
         </h4>
         <section>
-            <p>对于异步请求，最好放在componentDidMount中去操作，对于同步的状态改变，可以放在componentWillMount中，一般用的比较少。</p>
+            <p>对于异步请求，最好放在componentDidMount中去操作，对于同步的状态改变，
+                可以放在 <code>componentWillMount</code> 中，一般用的比较少。</p>
+            <p class="mt-20 ">
+                如果认为在<code>componentWillMount</code>里发起请求能够提早获取结果，这种想法是错误的。通常<code>componentWillMount</code>比
+                <code>componentDidMount</code>早不了多少微秒，网络上的任何一点延迟，这一点的差异都可忽略不计。
+            </p>
+            <p class="mt-20">
+                <span class="c-h7">react的生命周期：</span> constructor() -> componentWillMount() -> render() ->
+                componentDidMount()
+            </p>
+            <p>上面这些方法的调用是有次序的，由上而下依次调用。</p>
+            <div>
+                <ul>
+                    <li>
+                        constructor被调用是在组件准备要挂载的最开始，此时组件尚未挂载到网页上。
+                    </li>
+                    <li>
+                        componentWillMount方法的调用在constructor之后，在render之前，在这方法里的代码调用setState方法不会触发重新render，
+                        所以它一般不会用来作加载数据之用。
+                    </li>
+                    <li>
+                        componentDidMount方法中的代码，是在组件已经完全挂载到网页上才会调用被执行，所以可以保证数据的加载。此外，在这方法中调用setState
+                        方法，会触发重新渲染。所以，官方设计这个方法就是用来加载外部数据用的，或处理其他的副作用代码。与组件上的数据无关的加载，也可以
+                        在constructor里做，但constructor是做组件state初绐化工作，并不是做加载数据这工作的，constructor里也不能setState，还有加载
+                        的时间太长或者出错，页面就无法加载出来。所以有副作用的代码都会集中在componentDidMount方法里。
+                    </li>
+                </ul>
+            </div>
+            <p class="mt-20">总结：</p>
+            <div>
+                <ul>
+                    <li>
+                        跟服务器端渲染（同构）有关系，如果在componentWillMount里面获取数据，fetch data会执行两次，一次在服务器端一次在客户端。
+                        在componentDidMount中可以解决这个问题，componentWillMount同样也会render两次。
+                    </li>
+                    <li>
+                        在componentWillMount中fetch data，数据一定在render后才能到达，如果忘记了设置初始状态，用户体验不好。
+                    </li>
+                    <li>
+                        react16.0以后，componentWillMount可能会被执行多次。
+                    </li>
+                </ul>
+            </div>
         </section>
     </div>
 </template>
@@ -413,11 +455,11 @@
 import { getCurrentInstance, ref } from "vue"
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;
-const newLifeCycle = require('@/assets/reactLifeCycle/newLifeCycle.jpg');
-const oldLifeCycle = require('@/assets/reactLifeCycle/oldLifeCycle.jpg')
+const newLifeCycle = require('@/assets/react/newLifeCycle.jpg');
+const oldLifeCycle = require('@/assets/react/oldLifeCycle.jpg')
 const lifeCycleImageList = ref([
-    require("@/assets/reactLifeCycle/newLifeCycle.jpg"),
-    require("@/assets/reactLifeCycle/oldLifeCycle.jpg"),
+    require("@/assets/react/newLifeCycle.jpg"),
+    require("@/assets/react/oldLifeCycle.jpg"),
 ])
 const ReactDerivedLink = ref<String>('https://zh-hans.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state')
 

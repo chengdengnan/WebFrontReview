@@ -53,7 +53,7 @@ const dataSource: Array<GlobalSidebar> = [
                         id: 103,
                         parentId: 1,
                         hashId: "ReactDiff",
-                        title: "React diff算法的原理"
+                        title: "React Diffing算法的原理"
                     },
                     {
                         id: 104,

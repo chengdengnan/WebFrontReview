@@ -92,6 +92,9 @@
             3、React diff算法的原理是什么？
         </h4>
         <section>
+            <WebImage v-model="reactDiff" :preview-src-list="reactDiffImageList" height="170px" :initial-index="0">
+            </WebImage>
+
             <p>
                 实际上，<code>diff</code> 算法探讨的就是虚拟 <code>DOM</code> 树发生变化后，生成 <code>DOM</code>
                 树更新补丁的方式。它通过对比新旧两株虚拟 <code>DOM</code> 树的变更差异，
@@ -110,6 +113,8 @@
                     </li>
                 </ul>
             </div>
+            <WebImage v-model="reactDiff2" :preview-src-list="reactDiffImageList" :initial-index="1"></WebImage>
+
             <p class="c-h6">待完善,请等候.....</p>
         </section>
     </div>
@@ -128,7 +133,24 @@
                 创建的还是被移动而来的元素，从而减少不必要的元素重新渲染。此外，<code>React</code>还需要借助
                 <code>key</code>值来判断元素与本地状态的关联关系。
             </p>
-            <p class="c-h7">注意事项：</p>
+            <div class="mt-20">
+                <p class="c-h7">用 <code>index</code> 作为<code>key</code>可能会引发的问题：</p>
+                <ul>
+                    <li>
+                        若对数据进行：逆序添加、逆序删除等破坏顺序的操作：
+                        <p class="ml-20">会产生没有必要的真实DOM更新 ===> 界面效果没问题，效率低。</p>
+                    </li>
+                    <li>
+                        如果结构中还包含输入类的DOM：
+                        <p class="ml-20">会产生错误DOM更新 ===> 界面有问题。</p>
+                    </li>
+                    <li>
+                        注意：如果不存在对数据进行逆序添加、逆序删除等破坏顺序操作，仅用于渲染列表用于展示，
+                        使用index作为key是没有问题的。
+                    </li>
+                </ul>
+            </div>
+            <p class="c-h7 mt-20">注意事项：</p>
             <div>
                 <ul>
                     <li>
@@ -220,11 +242,18 @@
 </template>
 
 <script lang='ts' setup >
-import { getCurrentInstance } from "vue"
+import { getCurrentInstance, ref } from "vue"
 
 const currentInstance = getCurrentInstance();
 const { $builtIn } = currentInstance?.appContext.config.globalProperties as any;
 
+
+const reactDiff = require('@/assets/react/reactDiffing.jpg');
+const reactDiff2 = require('@/assets/react/reactDiffing2.jpg');
+const reactDiffImageList = ref([
+    require('@/assets/react/reactDiffing.jpg'),
+    require('@/assets/react/reactDiffing2.jpg')
+])
 
 const JSCreateVirtualDOM = $builtIn(`
 <div id="container2"></div>
