@@ -114,8 +114,57 @@
                 </ul>
             </div>
             <WebImage v-model="reactDiff2" :preview-src-list="reactDiffImageList" :initial-index="1"></WebImage>
+            <p class="c-h7">一个简单的例子：</p>
+            <div>
+                <WebPrismEditor v-model="ReactExampleComponent"></WebPrismEditor>
+                <p>
+                    这里，首先假定一个<code>ExampleComponent</code>可见，然后再改变它的状态，让它不可见。映射为
+                    真实的<code>DOM</code>操作是这样的，React 会创建一个 <code>div</code>节点
+                </p>
+                <WebPrismEditor v-model="ReactExampleNote"></WebPrismEditor>
+                <p>
+                    当把<code>visbile</code>的值变为<code>false</code>时，就会替换<code>class</code>属性为
+                    <code>hidden</code>，并重写内部的<code>innerText</code>为<code>hidden</code>。
+                    <span class="c-h7">这样一个生成补丁、更新差异的过程统称为 diff(diffing) 算法</span>
+                </p>
+                <p class="mt-20">
+                    Diff 算法可以总结为三个策略：分别从树、组件、元素三个层面进行复杂度的优化：
+                </p>
+                <p class="mt-20 c-h7">
+                    策略一：忽略节点跨层级操作场景，提示对比效率(基于树进行对比)。
+                </p>
+                <p>
+                    这一策略需要进行树比对，即对树进行分层比较。树比对的处理手法是非常“暴力”的，即两棵树只对同一
+                    层次的节点进行比较，如果发现节点已经不存在了，则该节点及其子节点会被完全删除掉，不会用于进一步
+                    的比较，这就提升了比对效率。
+                </p>
 
-            <p class="c-h6">待完善,请等候.....</p>
+                <p class="mt-20 c-h7">
+                    策略二：如果组件的 class 一致，则默认认为相似的树结构，否则默认为不同的树结构(基于组件进行对比)。
+                </p>
+                <p>
+                    在组件比对的过程中：
+                <div>
+                    <ul>
+                        <li>如果组件是同一类型则进行树比对；</li>
+                        <li>如果不是则直接放入补丁中；</li>
+                    </ul>
+                </div>
+                </p>
+                <p>
+                    只要父组件类型不同，就会被重新渲染。这就是为什么<code>shouldComponentUpdate、
+                        PureComponent、React.memo
+                    </code>可以提高性能的原因
+                </p>
+                <p class="mt-20 c-h7">
+                    策略三：同一层级的子节点，可以通过标记 key 的方式进行列表对比(基于节点进行对比)。
+                </p>
+                <p>
+                    元素比对主要发生在同层级中，通过标记节点操作生成补丁。节点操作包含了插入、移动、删除等。
+                    其中节点重新排序同时涉及插入、移动、删除三个操作，所以效率消耗最大，此时策略三起到了至关重要的作用。
+                    通过标记 <code>key</code> 的方式，React 可以直接移动 <code>DOM</code> 节点，降低内耗。
+                </p>
+            </div>
         </section>
     </div>
     <div>
@@ -283,7 +332,17 @@ const virtualDOM = (
 ReactDOM.render(virtualDOM, document.getElementById("container"));
 `)
 
+const ReactExampleComponent = $builtIn(`
+class ExampleComponent extends React.Component {
+  render() {
+    if(this.props.isVisible) {
+       return <div className="visible">visbile</div>;
+    }
+     return <div className="hidden">hidden</div>;
+  }
+}`)
 
+const ReactExampleNote = $builtIn(`<div class="visible">visbile</div>`)
 </script>
 
 <style lang='scss'>

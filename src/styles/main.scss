@@ -62,9 +62,10 @@ $title-color: #2c3e50;
         font-weight: 600;
         margin: 10px 0;
     }
-    // 五级标题，不加粗，加重显示
+    // 五级标题，加粗，加重显示
     .c-h7 {
         color: #000;
+        font-weight: 600;
     }
     // 一级内容下的直接子元素
     div > ul {
