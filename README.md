@@ -1,4 +1,5 @@
 # web-replay
+Personal blog, mainly a review of knowledge points.
 
 ## Project setup
 
